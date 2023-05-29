@@ -1,0 +1,11 @@
+.container {
+  align-items: center;
+  justify-content: center;
+  }
+
+h1 {
+  padding: 1rem 10%;
+  text-align: center;
+  background: rgba(37,97,207,1);
+  color: white;
+}

@@ -1,20 +1,20 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {MatPaginator} from "@angular/material/paginator";
-import {MatTableDataSource} from "@angular/material/table";
 import {Produto} from "../../../models/produto";
 import {ProdutoService} from "../../../services/produto.service";
+import {MatTableDataSource} from "@angular/material/table";
+import {MatPaginator} from "@angular/material/paginator";
 
 @Component({
-  selector: 'app-tecnico-list',
-  templateUrl: './tecnico-list.component.html',
-  styleUrls: ['./tecnico-list.component.css']
+  selector: 'app-home',
+  templateUrl: './home.component.html',
+  styleUrls: ['./home.component.css']
 })
-export class TecnicoListComponent implements OnInit{
-   ELEMENT_DATA: Produto[] = [];
+export class HomeComponent implements OnInit{
+  ELEMENT_DATA: Produto[] = [];
   constructor(
     private service: ProdutoService
   ) {}
-  displayedColumns: string[] = ['name', 'categorias', 'quantidade', 'valor', 'acoes'];
+  displayedColumns: string[] = ['cliente', 'produtos', 'valor', 'metodopag', 'acoes'];
   dataSource = new MatTableDataSource<Produto>(this.ELEMENT_DATA);
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -32,5 +32,5 @@ export class TecnicoListComponent implements OnInit{
   ngOnInit(): void {
     this.findAll();
   }
-}
 
+}

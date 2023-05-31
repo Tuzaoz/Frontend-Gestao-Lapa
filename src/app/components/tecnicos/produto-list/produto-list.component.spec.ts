@@ -1,16 +1,16 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { TecnicoListComponent } from './tecnico-list.component';
+import { ProdutoListComponent } from './produto-list.component';
 
 describe('TecnicoListComponent', () => {
-  let component: TecnicoListComponent;
-  let fixture: ComponentFixture<TecnicoListComponent>;
+  let component: ProdutoListComponent;
+  let fixture: ComponentFixture<ProdutoListComponent>;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [TecnicoListComponent]
+      declarations: [ProdutoListComponent]
     });
-    fixture = TestBed.createComponent(TecnicoListComponent);
+    fixture = TestBed.createComponent(ProdutoListComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

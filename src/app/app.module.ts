@@ -30,7 +30,7 @@ import {RouterOutlet} from "@angular/router";
 import { AppRoutingModule } from './app-routing.module';
 import { HomeComponent } from './components/home/home.component';
 import { HeaderComponent } from './components/header/header.component';
-import { TecnicoListComponent } from './components/tecnicos/tecnico-list/tecnico-list.component';
+import { ProdutoListComponent } from './components/tecnicos/produto-list/produto-list.component';
 import {ToastrModule} from "ngx-toastr";
 
 
@@ -40,7 +40,7 @@ import {ToastrModule} from "ngx-toastr";
     NavComponent,
     HomeComponent,
     HeaderComponent,
-    TecnicoListComponent
+    ProdutoListComponent
   ],
   imports: [
     BrowserModule,

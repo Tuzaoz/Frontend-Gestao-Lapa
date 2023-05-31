@@ -32,6 +32,8 @@ import { HomeComponent } from './components/home/home.component';
 import { HeaderComponent } from './components/header/header.component';
 import { ProdutoListComponent } from './components/tecnicos/produto-list/produto-list.component';
 import {ToastrModule} from "ngx-toastr";
+import { ProdutoAddComponent } from './components/tecnicos/produto-add/produto-add.component';
+import {MatDialogModule} from "@angular/material/dialog";
 
 
 @NgModule({
@@ -40,7 +42,8 @@ import {ToastrModule} from "ngx-toastr";
     NavComponent,
     HomeComponent,
     HeaderComponent,
-    ProdutoListComponent
+    ProdutoListComponent,
+    ProdutoAddComponent
   ],
   imports: [
     BrowserModule,
@@ -67,6 +70,7 @@ import {ToastrModule} from "ngx-toastr";
     MatCardModule,
     RouterOutlet,
     AppRoutingModule,
+    MatDialogModule,
     ToastrModule.forRoot({
       timeOut: 4000,
       closeButton: true,

@@ -2,3 +2,12 @@
   width: 95%;
   margin: auto;
 }
+.btn-adicionar {
+  background: #00AA55FF;
+}
+.button-row{
+  display: flex;
+  justify-content: end;
+  margin-top: 10px;
+}
+

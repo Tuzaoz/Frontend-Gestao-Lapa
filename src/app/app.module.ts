@@ -31,6 +31,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { HomeComponent } from './components/home/home.component';
 import { HeaderComponent } from './components/header/header.component';
 import { TecnicoListComponent } from './components/tecnicos/tecnico-list/tecnico-list.component';
+import {ToastrModule} from "ngx-toastr";
 
 
 @NgModule({
@@ -65,7 +66,12 @@ import { TecnicoListComponent } from './components/tecnicos/tecnico-list/tecnico
     MatListModule,
     MatCardModule,
     RouterOutlet,
-    AppRoutingModule
+    AppRoutingModule,
+    ToastrModule.forRoot({
+      timeOut: 4000,
+      closeButton: true,
+      progressBar: true
+    })
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -34,6 +34,8 @@ import { ProdutoListComponent } from './components/tecnicos/produto-list/produto
 import {ToastrModule} from "ngx-toastr";
 import { ProdutoAddComponent } from './components/tecnicos/produto-add/produto-add.component';
 import {MatDialogModule} from "@angular/material/dialog";
+import {MatSortModule} from "@angular/material/sort";
+
 
 
 @NgModule({
@@ -75,7 +77,8 @@ import {MatDialogModule} from "@angular/material/dialog";
       timeOut: 4000,
       closeButton: true,
       progressBar: true
-    })
+    }),
+    MatSortModule
   ],
   providers: [],
   bootstrap: [AppComponent]

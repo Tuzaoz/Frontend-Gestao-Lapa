@@ -4,6 +4,7 @@
 }
 .btn-adicionar {
   background: #00AA55FF;
+  color: white;
 }
 .button-row{
   display: flex;

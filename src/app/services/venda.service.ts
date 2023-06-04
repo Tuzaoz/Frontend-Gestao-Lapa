@@ -18,4 +18,5 @@ export class VendaService {
   findHoje(): Observable<Venda[]> {
     return this.http.get<Venda[]>(`${API_CONFIG.baseUrl}/vendas/hoje`);
   }
+
 }

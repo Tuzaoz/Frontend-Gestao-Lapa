@@ -18,7 +18,7 @@ export class ProdutoAddComponent {
     name: '',
     categorias: '',
     quantidade: null,
-    valor: 0,
+    valor: null,
   }
   constructor(
     public dialogRef: MatDialogRef<ProdutoListComponent>,

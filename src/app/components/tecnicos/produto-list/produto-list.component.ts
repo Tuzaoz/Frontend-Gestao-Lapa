@@ -14,7 +14,7 @@ import {MatSort} from "@angular/material/sort";
   templateUrl: './produto-list.component.html',
   styleUrls: ['./produto-list.component.css']
 })
-export class ProdutoListComponent implements OnInit, AfterViewInit {
+export class ProdutoListComponent implements OnInit {
 
    ELEMENT_DATA: Produto[] = [];
   constructor(
@@ -31,7 +31,9 @@ export class ProdutoListComponent implements OnInit, AfterViewInit {
   findAll(){
     this.service.findAll().subscribe(resposta =>{
       this.ELEMENT_DATA = resposta;
-      this.dataSource = new MatTableDataSource<Produto>(resposta);
+      this.dataSource = new MatTableDataSource<Produto>(resposta)
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
     })
   }
 
@@ -50,9 +52,10 @@ export class ProdutoListComponent implements OnInit, AfterViewInit {
     }
   }
 
-  ngAfterViewInit(): void {
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
-  }
+  // ngAfterViewInit(): void {
+  //
+  //   this.findAll();
+  //
+  // }
 }
 

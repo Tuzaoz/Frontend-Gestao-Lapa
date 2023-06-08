@@ -3,7 +3,7 @@ import {HttpClient} from "@angular/common/http";
 import {API_CONFIG} from "../config/api.config";
 import {Observable} from "rxjs";
 import {Produto} from "../models/produto";
-import {ProdutoAddComponent} from "../components/tecnicos/produto-add/produto-add.component";
+import {ProdutoAddComponent} from "../components/produtos/produto-add/produto-add.component";
 
 @Injectable({
   providedIn: 'root'

@@ -32,7 +32,8 @@ export class ProdutoAddComponent {
     this.produtoService.create(this.produto).subscribe(() => {
       this.toast.success('Produto cadastrado com sucesso', 'Cadastro');
       this.dialogRef.close()
-      }, ex => {
+      this.router.navigate(['home']).then(r => this.router.navigate(['produtos']))
+    }, ex => {
       if(ex.error.errors) {
         ex.error.errors.forEach(element => {
           this.toast.error(element.message);
@@ -40,8 +41,6 @@ export class ProdutoAddComponent {
       } else {
         this.toast.error(ex.error.message);
       }
-      this.list.findAll(),
-      this.router.navigate(['tecnicos'])
 
     })
   }

@@ -30,9 +30,9 @@ import {RouterOutlet} from "@angular/router";
 import { AppRoutingModule } from './app-routing.module';
 import { HomeComponent } from './components/home/home.component';
 import { HeaderComponent } from './components/header/header.component';
-import { ProdutoListComponent } from './components/tecnicos/produto-list/produto-list.component';
+import { ProdutoListComponent } from './components/produtos/produto-list/produto-list.component';
 import {ToastrModule} from "ngx-toastr";
-import { ProdutoAddComponent } from './components/tecnicos/produto-add/produto-add.component';
+import { ProdutoAddComponent } from './components/produtos/produto-add/produto-add.component';
 import {MatDialogModule} from "@angular/material/dialog";
 import {MatSortModule} from "@angular/material/sort";
 

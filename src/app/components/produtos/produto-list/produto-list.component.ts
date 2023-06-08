@@ -52,10 +52,5 @@ export class ProdutoListComponent implements OnInit {
     }
   }
 
-  // ngAfterViewInit(): void {
-  //
-  //   this.findAll();
-  //
-  // }
 }
 

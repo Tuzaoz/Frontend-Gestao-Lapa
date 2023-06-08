@@ -35,6 +35,7 @@ import {ToastrModule} from "ngx-toastr";
 import { ProdutoAddComponent } from './components/produtos/produto-add/produto-add.component';
 import {MatDialogModule} from "@angular/material/dialog";
 import {MatSortModule} from "@angular/material/sort";
+import {ClientesListComponent} from "./components/clientes/clientes-list/clientes-list.component";
 
 
 
@@ -45,7 +46,8 @@ import {MatSortModule} from "@angular/material/sort";
     HomeComponent,
     HeaderComponent,
     ProdutoListComponent,
-    ProdutoAddComponent
+    ProdutoAddComponent,
+    ClientesListComponent
   ],
   imports: [
     BrowserModule,

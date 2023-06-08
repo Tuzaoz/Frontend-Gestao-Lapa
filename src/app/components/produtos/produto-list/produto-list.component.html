@@ -1,9 +1,13 @@
-<h1> Estoque </h1>
+<div class="container-header">
+  <div class="header">
+    <h1> Controle de Estoque </h1>
+  </div>
+</div>
 <div class="container">
 
   <mat-form-field>
-    <mat-label>Filter</mat-label>
-    <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Mia" #input>
+    <mat-label>Buscar Produtos</mat-label>
+    <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Bravecto" #input>
   </mat-form-field>
   <div class="mat-elevation-z8">
     <table mat-table [dataSource]="dataSource" matSort>
@@ -48,5 +52,5 @@
       <mat-icon>add</mat-icon>
       Adicionar produto
     </button>
-</div>
+  </div>
 </div>

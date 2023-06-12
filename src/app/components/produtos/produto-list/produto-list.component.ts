@@ -6,6 +6,7 @@ import {ProdutoService} from "../../../services/produto.service";
 import {MatDialog} from "@angular/material/dialog";
 import {ProdutoAddComponent} from "../produto-add/produto-add.component";
 import {MatSort} from "@angular/material/sort";
+import {ProdutoUpdateComponent} from "../produto-update/produto-update.component";
 @Injectable({
   providedIn: 'root'
 })
@@ -27,6 +28,9 @@ export class ProdutoListComponent implements OnInit {
   @ViewChild(MatSort) sort: MatSort
   openDialog(): void {
     const dialogRef = this.dialog.open(ProdutoAddComponent, {width: '500px'});
+  }
+  openDialogUpdate(): void {
+    const dialogRef = this.dialog.open(ProdutoUpdateComponent, {width: '500px'});
   }
   findAll(){
     this.service.findAll().subscribe(resposta =>{

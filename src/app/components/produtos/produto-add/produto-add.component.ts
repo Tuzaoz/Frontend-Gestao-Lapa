@@ -14,7 +14,7 @@ import { FormsModule } from '@angular/forms';
 })
 export class ProdutoAddComponent {
   produto: Produto ={
-
+    id: '',
     name: '',
     categorias: '',
     quantidade: null,
@@ -25,7 +25,6 @@ export class ProdutoAddComponent {
     private produtoService: ProdutoService,
     private toast:    ToastrService,
     private router:          Router,
-    private list: ProdutoListComponent,
   ) {}
 
   create(): void {

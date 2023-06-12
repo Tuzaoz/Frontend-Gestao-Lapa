@@ -14,6 +14,10 @@
 
 
       <!-- Name Column -->
+      <ng-container class="ng-hide" matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> id </th>
+        <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+      </ng-container>
       <ng-container matColumnDef="name">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Nome </th>
         <td mat-cell *matCellDef="let element"> {{element.name}} </td>
@@ -37,7 +41,7 @@
       <ng-container matColumnDef="acoes">
         <th mat-header-cell *matHeaderCellDef> Ações </th>
         <td mat-cell *matCellDef="let element">
-          <button mat-icon-button color="primary" (click)="openDialogUpdate()">
+          <button (click)="openDialogUpdate(element.id)" color="primary" mat-icon-button>
            <mat-icon>edit</mat-icon>
           </button>
         </td>

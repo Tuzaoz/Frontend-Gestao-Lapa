@@ -14,7 +14,7 @@ import { FormsModule } from '@angular/forms';
 })
 export class ProdutoAddComponent {
   produto: Produto ={
-    id: '',
+    id: null,
     name: '',
     categorias: '',
     quantidade: null,

@@ -22,15 +22,16 @@ export class ProdutoListComponent implements OnInit {
     private service: ProdutoService,
     public dialog: MatDialog
   ) {}
-  displayedColumns: string[] = ['name', 'categoria', 'quantidade', 'valor', 'acoes'];
+  displayedColumns: string[] = ['id','name', 'categoria', 'quantidade', 'valor', 'acoes'];
   dataSource = new MatTableDataSource<Produto>(this.ELEMENT_DATA);
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort
   openDialog(): void {
     const dialogRef = this.dialog.open(ProdutoAddComponent, {width: '500px'});
   }
-  openDialogUpdate(): void {
-    const dialogRef = this.dialog.open(ProdutoUpdateComponent, {width: '500px'});
+  openDialogUpdate(id: number): void {
+    const dialogRef = this.dialog.open(ProdutoUpdateComponent, {width: '500px',
+    data: id});
   }
   findAll(){
     this.service.findAll().subscribe(resposta =>{

@@ -21,6 +21,9 @@ export class ProdutoService {
   return this.http.post<Produto>(`${API_CONFIG.baseUrl}/produtos`, produto);
   }
   findById(id:number): Observable<Produto>{
-    return this.http.get<Produto>(`${API_CONFIG.baseUrl}/produtos/${id}`)
+    return this.http.get<Produto>(`${API_CONFIG.baseUrl}/produtos/${id}`);
+  }
+  update(produto: Produto): Observable<Produto>{
+    return this.http.put<Produto>(`${API_CONFIG.baseUrl}/produtos/${produto.id}`, produto);
   }
 }

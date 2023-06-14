@@ -26,7 +26,7 @@
     <span matTextPrefix>$&nbsp;</span>
   </mat-form-field>
   <div mat-dialog-actions>
-    <button mat-button (click)="onNoClick()">No Thanks</button>
-    <button mat-raised-button class="cadastrar" routerLink="produtos">Cadastrar</button>
+    <button mat-button (click)="onNoClick()">Voltar</button>
+    <button mat-raised-button class="cadastrar" (click)="update()" routerLink="produtos">Atualizar Produto</button>
   </div>
 </div>

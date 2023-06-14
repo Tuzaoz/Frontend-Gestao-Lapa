@@ -28,7 +28,22 @@ export class ProdutoUpdateComponent implements OnInit{
   onNoClick(): void {
     this.dialogRef.close();
   }
+  update(): void {
+    this.produtoService.update(this.produto).subscribe(() => {
+      this.toast.success('Produto atualizado com sucesso', 'Atualização');
+      this.dialogRef.close()
+      this.router.navigate(['home']).then(r => this.router.navigate(['produtos']))
+    }, ex => {
+      if(ex.error.errors) {
+        ex.error.errors.forEach(element => {
+          this.toast.error(element.message);
+        });
+      } else {
+        this.toast.error(ex.error.message);
+      }
 
+    })
+  }
   ngOnInit(): void {
     this.produtoService.findById(this.data).subscribe(resposta => {
       this.produto.id = resposta.id;

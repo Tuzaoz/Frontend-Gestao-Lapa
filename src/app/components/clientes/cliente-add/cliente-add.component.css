@@ -1,0 +1,13 @@
+.mat-mdc-form-field{
+  display: block;
+  margin-bottom: 10px;
+}
+button.cadastrar{
+  background: #00AA55FF;
+  color: #ffffff !important;
+}
+.mat-mdc-dialog-content{
+  max-height: fit-content;
+}
+
+

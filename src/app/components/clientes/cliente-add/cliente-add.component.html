@@ -1,1 +1,19 @@
-<p>cliente-add works!</p>
+<div mat-dialog-content>
+  <h1> Cadastro de Cliente</h1>
+  <mat-form-field>
+    <mat-label>Nome do Cliente</mat-label>
+    <input type="text" [(ngModel)]="cliente.nome" name="nome"  matInput>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Telefone</mat-label>
+    <input type="fone" [(ngModel)]="cliente.fone" name="tel"  matInput>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label  name="quantidade"> Data de Aniversário </mat-label>
+    <input [(ngModel)]="cliente.dataAniversario" matInput type="date">
+  </mat-form-field>
+  <div mat-dialog-actions>
+    <button mat-button (click)="onNoClick()">Voltar</button>
+    <button mat-raised-button (click)="create()" class="cadastrar">Cadastrar Clientes</button>
+  </div>
+</div>

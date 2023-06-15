@@ -17,5 +17,5 @@ export class NavComponent implements OnInit{
   ngOnInit(): void {
     this.router.navigate(['home'])
   }
-  hoje = `${dia.toString().padStart(2, '0')}/${mes.toString().padStart(2, '0')}/${ano.toString()}`
+  public static hoje = `${dia.toString().padStart(2, '0')}/${mes.toString().padStart(2, '0')}/${ano.toString()}`
 }

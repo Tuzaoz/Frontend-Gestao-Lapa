@@ -9,6 +9,7 @@ import {ProdutoAddComponent} from "../../produtos/produto-add/produto-add.compon
 import {ProdutoUpdateComponent} from "../../produtos/produto-update/produto-update.component";
 import {Cliente} from "../../../models/cliente";
 import {ClienteService} from "../../../services/cliente.service";
+import {ClienteAddComponent} from "../cliente-add/cliente-add.component";
 
 @Component({
   selector: 'app-clientes-list',
@@ -26,7 +27,7 @@ export class ClientesListComponent implements OnInit{
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort
   openDialog(): void {
-    const dialogRef = this.dialog.open(ProdutoAddComponent, {width: '500px'});
+    const dialogRef = this.dialog.open(ClienteAddComponent, {width: '500px'});
   }
   openDialogUpdate(id: number): void {
     const dialogRef = this.dialog.open(ProdutoUpdateComponent, {width: '500px',

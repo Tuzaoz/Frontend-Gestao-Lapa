@@ -2,7 +2,7 @@ export interface Cliente {
   id: number;
   nome: string;
   fone: string;
-  dataCriacao: string;
-  dataAniversario: number;
+  dataCriacao: Date;
+  dataAniversario: string;
   vendas?: any[];
 }

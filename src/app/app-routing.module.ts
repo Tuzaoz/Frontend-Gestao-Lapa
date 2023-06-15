@@ -4,13 +4,15 @@ import {NavComponent} from "./components/nav/nav.component";
 import {HomeComponent} from "./components/home/home.component";
 import {ProdutoListComponent} from "./components/produtos/produto-list/produto-list.component";
 import {ProdutoAddComponent} from "./components/produtos/produto-add/produto-add.component";
+import {ClientesListComponent} from "./components/clientes/clientes-list/clientes-list.component";
 
 const routes: Routes = [
   {
     path: '', component: NavComponent, children:[
       {path:'home',  component: HomeComponent},
       {path:'produtos',  component: ProdutoListComponent},
-      {path: 'produtos/adicionar',component:ProdutoAddComponent}
+      {path: 'produtos/adicionar',component:ProdutoAddComponent},
+      {path:'clientes', component: ClientesListComponent}
     ]
   }
 ]

@@ -39,6 +39,7 @@ import {ClientesListComponent} from "./components/clientes/clientes-list/cliente
 import { ProdutoUpdateComponent } from './components/produtos/produto-update/produto-update.component';
 import { ClienteAddComponent } from './components/clientes/cliente-add/cliente-add.component';
 import { ClienteUpdateComponent } from './components/clientes/cliente-update/cliente-update.component';
+import { VendasListComponent } from './components/vendas/vendas-list/vendas-list.component';
 
 
 
@@ -53,7 +54,8 @@ import { ClienteUpdateComponent } from './components/clientes/cliente-update/cli
     ClientesListComponent,
     ProdutoUpdateComponent,
     ClienteAddComponent,
-    ClienteUpdateComponent
+    ClienteUpdateComponent,
+    VendasListComponent
   ],
   imports: [
     BrowserModule,

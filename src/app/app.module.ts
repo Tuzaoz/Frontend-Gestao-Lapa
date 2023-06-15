@@ -38,6 +38,7 @@ import {MatSortModule} from "@angular/material/sort";
 import {ClientesListComponent} from "./components/clientes/clientes-list/clientes-list.component";
 import { ProdutoUpdateComponent } from './components/produtos/produto-update/produto-update.component';
 import { ClienteAddComponent } from './components/clientes/cliente-add/cliente-add.component';
+import { ClienteUpdateComponent } from './components/clientes/cliente-update/cliente-update.component';
 
 
 
@@ -51,7 +52,8 @@ import { ClienteAddComponent } from './components/clientes/cliente-add/cliente-a
     ProdutoAddComponent,
     ClientesListComponent,
     ProdutoUpdateComponent,
-    ClienteAddComponent
+    ClienteAddComponent,
+    ClienteUpdateComponent
   ],
   imports: [
     BrowserModule,

@@ -37,6 +37,7 @@ import {MatDialogModule} from "@angular/material/dialog";
 import {MatSortModule} from "@angular/material/sort";
 import {ClientesListComponent} from "./components/clientes/clientes-list/clientes-list.component";
 import { ProdutoUpdateComponent } from './components/produtos/produto-update/produto-update.component';
+import { ClienteAddComponent } from './components/clientes/cliente-add/cliente-add.component';
 
 
 
@@ -49,7 +50,8 @@ import { ProdutoUpdateComponent } from './components/produtos/produto-update/pro
     ProdutoListComponent,
     ProdutoAddComponent,
     ClientesListComponent,
-    ProdutoUpdateComponent
+    ProdutoUpdateComponent,
+    ClienteAddComponent
   ],
   imports: [
     BrowserModule,

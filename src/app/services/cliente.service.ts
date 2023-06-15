@@ -20,7 +20,7 @@ export class ClienteService {
     return this.http.post<Cliente>(`${API_CONFIG.baseUrl}/cliente`, cliente);
   }
   findById(id:number): Observable<Cliente>{
-    return this.http.get<Cliente>(`${API_CONFIG.baseUrl}/cliente/${id}`);
+    return this.http.get<Cliente>(`${API_CONFIG.baseUrl}/cliente/find/${id}`);
   }
   update(cliente: Cliente): Observable<Cliente>{
     return this.http.put<Cliente>(`${API_CONFIG.baseUrl}/cliente/${cliente.id}`, cliente);

@@ -4,6 +4,7 @@ import {ProdutoService} from "../../services/produto.service";
 import {MatTableDataSource} from "@angular/material/table";
 import {MatPaginator} from "@angular/material/paginator";
 import {Venda} from "../../models/venda";
+import {Title} from "@angular/platform-browser";
 
 @Component({
   selector: 'app-home',

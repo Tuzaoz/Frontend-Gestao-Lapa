@@ -40,6 +40,8 @@ import { ProdutoUpdateComponent } from './components/produtos/produto-update/pro
 import { ClienteAddComponent } from './components/clientes/cliente-add/cliente-add.component';
 import { ClienteUpdateComponent } from './components/clientes/cliente-update/cliente-update.component';
 import { VendasListComponent } from './components/vendas/vendas-list/vendas-list.component';
+import { VendasAddComponent } from './components/vendas/vendas-add/vendas-add.component';
+import { VendasUpdateComponent } from './components/vendas/vendas-update/vendas-update.component';
 
 
 
@@ -55,7 +57,9 @@ import { VendasListComponent } from './components/vendas/vendas-list/vendas-list
     ProdutoUpdateComponent,
     ClienteAddComponent,
     ClienteUpdateComponent,
-    VendasListComponent
+    VendasListComponent,
+    VendasAddComponent,
+    VendasUpdateComponent
   ],
   imports: [
     BrowserModule,

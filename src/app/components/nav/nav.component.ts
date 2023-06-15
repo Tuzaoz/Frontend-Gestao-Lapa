@@ -15,7 +15,7 @@ export class NavComponent implements OnInit{
   constructor(private router: Router,) {
   }
   ngOnInit(): void {
-    this.router.navigate(['home'])
+    this.router.navigate(['vendas'])
   }
   public static hoje = `${dia.toString().padStart(2, '0')}/${mes.toString().padStart(2, '0')}/${ano.toString()}`
 }

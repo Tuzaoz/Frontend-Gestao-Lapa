@@ -10,6 +10,7 @@ import {ProdutoUpdateComponent} from "../../produtos/produto-update/produto-upda
 import {Cliente} from "../../../models/cliente";
 import {ClienteService} from "../../../services/cliente.service";
 import {ClienteAddComponent} from "../cliente-add/cliente-add.component";
+import {ClienteUpdateComponent} from "../cliente-update/cliente-update.component";
 
 @Component({
   selector: 'app-clientes-list',
@@ -30,7 +31,7 @@ export class ClientesListComponent implements OnInit{
     const dialogRef = this.dialog.open(ClienteAddComponent, {width: '500px'});
   }
   openDialogUpdate(id: number): void {
-    const dialogRef = this.dialog.open(ProdutoUpdateComponent, {width: '500px',
+    const dialogRef = this.dialog.open(ClienteUpdateComponent, {width: '500px',
       data: id});
   }
   findAll(){

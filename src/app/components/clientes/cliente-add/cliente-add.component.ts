@@ -13,7 +13,6 @@ import {NavComponent} from "../../nav/nav.component";
   styleUrls: ['./cliente-add.component.css']
 })
 export class ClienteAddComponent {
-  nav: NavComponent;
   cliente: Cliente ={
     id: null,
     nome: '',

@@ -4,5 +4,5 @@ export interface Produto {
   categorias: string;
   quantidade: number;
   valor: number;
-  vendas?: any[];
+  // vendas?: any[];
 }

@@ -42,6 +42,8 @@ import { ClienteUpdateComponent } from './components/clientes/cliente-update/cli
 import { VendasListComponent } from './components/vendas/vendas-list/vendas-list.component';
 import { VendasAddComponent } from './components/vendas/vendas-add/vendas-add.component';
 import { VendasUpdateComponent } from './components/vendas/vendas-update/vendas-update.component';
+import {MatAutocompleteModule} from "@angular/material/autocomplete";
+import {NgFor} from "@angular/common";
 
 
 
@@ -87,6 +89,9 @@ import { VendasUpdateComponent } from './components/vendas/vendas-update/vendas-
     RouterOutlet,
     AppRoutingModule,
     MatDialogModule,
+    MatAutocompleteModule,
+    ReactiveFormsModule,
+    NgFor,
     ToastrModule.forRoot({
       timeOut: 4000,
       closeButton: true,

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-import {Observable} from "rxjs";
+import {map, Observable} from "rxjs";
 import {Cliente} from "../models/cliente";
 import {API_CONFIG} from "../config/api.config";
 
@@ -24,5 +24,11 @@ export class ClienteService {
   }
   update(cliente: Cliente): Observable<Cliente>{
     return this.http.put<Cliente>(`${API_CONFIG.baseUrl}/cliente/${cliente.id}`, cliente);
+  }
+  getData(){
+    return this.http.get(`${API_CONFIG.baseUrl}/produtos`)
+      .pipe(
+        map((response:[]) => response.map(produto => ({ id: produto['id'], nome: produto['name'] })))
+      )
   }
 }

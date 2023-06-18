@@ -3,11 +3,19 @@
 <!--  <form [formGroup]="formGroup">-->
   <mat-form-field>
     <mat-label>Nome do Cliente</mat-label>
-    <input type="text" [(ngModel)]="venda.nomeCliente" name="nome"  matInput>
+    <input type="text" [(ngModel)]="idCliente" name="nome"  matInput  [formControl]="pesquisaCliente"
+           [matAutocomplete]="autoCliente">
+    <mat-autocomplete #autoCliente="matAutocomplete" [displayWith]="displayFnClientes(clientes)">
+      <mat-option *ngFor="let cliente of filteredClientes" [value]="cliente.id">
+        {{ cliente.nome }}
+      </mat-option>
+    </mat-autocomplete>
   </mat-form-field>
+
   <mat-form-field>
     <mat-label>Produto</mat-label>
-    <input type="text" matInput placeholder="Produto" [formControl]="pesquisa" [matAutocomplete]="auto">
+    <input type="text" matInput placeholder="Produto" [(ngModel)]="idproduto" [formControl]="pesquisa"
+           [matAutocomplete]="auto">
     <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn(produtosDisponiveis)">
       <mat-option *ngFor="let produto of filteredOptions" [value]="produto.id">
         {{ produto.nome }}
@@ -25,6 +33,6 @@
 <!--  </form>-->
   <div mat-dialog-actions>
     <button mat-button (click)="onNoClick()">Voltar</button>
-    <button mat-raised-button (click)="create()" class="cadastrar">Cadastrar Clientes</button>
+    <button mat-raised-button (click)="create()" class="cadastrar">Cadastrar Venda</button>
   </div>
 </div>

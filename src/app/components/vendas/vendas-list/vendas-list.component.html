@@ -5,10 +5,7 @@
 </div>
 <div class="container">
 
-  <mat-form-field>
-    <mat-label>Buscar Produtos</mat-label>
-    <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Bravecto" #input>
-  </mat-form-field>
+
   <div class="mat-elevation-z8">
     <table mat-table [dataSource]="dataSource" matSort>
 
@@ -63,7 +60,7 @@
   <div class="button-row">
     <button mat-fab extended color="#primary" class="btn-adicionar" (click)="openDialog()">
       <mat-icon>add</mat-icon>
-      Adicionar produto
+      Cadastrar Venda
     </button>
   </div>
 </div>

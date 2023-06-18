@@ -29,22 +29,33 @@ export class VendasAddComponent implements OnInit{
     private toast:    ToastrService,
     private router:          Router,
     private fb : FormBuilder,
+    private clienteService: ClienteService,
 
   ) {}
   venda: Venda ={
     id: null,
     nomeCliente: null,
-    metodoPagamento: '',
-    valor:null,
+    metodoPagamento: 'Pix',
     produto: [],
+    valor:0.0,
     data: new Date(),
   }
-  // implementação select dinamico
-  public produtosDisponiveis: any[];
+  idCliente;
+  idprodutosSelecionados: any[];
+  idproduto: number;
+  produtosDisponiveis: any[];
+  clientes: any[]
+  filteredClientes: any[]
   filteredOptions: any[];
-  formGroup : FormGroup;
   pesquisa: FormControl = new FormControl();
+  pesquisaCliente: FormControl = new FormControl();
 
+  findClientes() {
+    this.clienteService.findAll().subscribe(resposta => {
+      this.clientes = resposta;
+      this.filteredClientes = resposta;
+    })
+  }
 
   findProdutos() {
     this.produtoService.getData().subscribe(resposta => {
@@ -54,7 +65,18 @@ export class VendasAddComponent implements OnInit{
   }
 
   create(): void {
-    this.vendaService.create(this.venda).subscribe(() => {
+    const cliente = new Cliente(this.idCliente);
+    let produtos: Produto[]=[]
+    this.venda.nomeCliente = cliente;
+    console.log(this.idproduto);
+    this.produtoService.findById(this.idproduto).pipe(
+      switchMap((produto) => {
+        const produtos = [produto];
+        this.venda.nomeCliente = cliente;
+        this.venda.produto = produtos;
+        return this.vendaService.create(this.venda);
+      })
+    ).subscribe(() => {
       this.toast.success('Venda cadastrada com sucesso', 'Cadastro');
       this.dialogRef.close()
       this.router.navigate(['home']).then(r => this.router.navigate(['vendas']))
@@ -74,12 +96,15 @@ export class VendasAddComponent implements OnInit{
   }
 
   ngOnInit(): void {
-    // this.initForm()
     this.findProdutos()
+    this.findClientes()
+    console.log( this.venda.produto)
 
     this.pesquisa.valueChanges.subscribe(response => {
-      console.log('data is ', response);
       this.filtrarProdutos(response);
+    });
+    this.pesquisaCliente.valueChanges.subscribe(response => {
+      this.filtrarClientes(response);
     });
   }
   filtrarProdutos(value) {
@@ -87,7 +112,17 @@ export class VendasAddComponent implements OnInit{
         return produto.nome.toLowerCase().indexOf(value.toLowerCase()) > -1 });
 
   }
+  filtrarClientes(value) {
+    this.filteredClientes = this.clientes.filter(cliente => {
+      return cliente.nome.toLowerCase().indexOf(value.toLowerCase()) > -1 });
 
+  }
+  displayFnClientes(options: any[]): (id: number) => string {
+    return (id: number) => {
+      const correspondingOption = Array.isArray(options) ? options.find(option => option.id === id) : null;
+      return correspondingOption ? correspondingOption.nome : '';
+    }
+  }
   displayFn(options: any[]): (id: number) => string {
     return (id: number) => {
       const correspondingOption = Array.isArray(options) ? options.find(option => option.id === id) : null;
@@ -95,13 +130,5 @@ export class VendasAddComponent implements OnInit{
     }
   }
 
-  // private initForm() {
-  //   this.formGroup = this.fb.group({
-  //     'pesquisa' : ['']
-  //   })
-  //   this.formGroup.get('pesquisa').valueChanges.subscribe(response => {
-  //     console.log('data is ', response);
-  //     this.filtrarProdutos(response);
-  //   })
-  // }
+
 }

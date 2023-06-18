@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {API_CONFIG} from "../config/api.config";
-import {map, Observable} from "rxjs";
+import {forkJoin, map, Observable} from "rxjs";
 import {Produto} from "../models/produto";
 import {ProdutoAddComponent} from "../components/produtos/produto-add/produto-add.component";
 
@@ -33,4 +33,8 @@ export class ProdutoService {
         map((response:[]) => response.map(produto => ({ id: produto['id'], nome: produto['name'] })))
       )
   }
+  findProdutosById(id: number[]):Observable<Produto[]>{
+    const requests: Observable<Produto>[] = id.map(id => this.findById(id));
+    return forkJoin(requests)
+}
 }

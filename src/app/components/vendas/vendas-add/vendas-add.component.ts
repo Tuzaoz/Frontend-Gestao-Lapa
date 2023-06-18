@@ -11,8 +11,8 @@ import {Produto} from "../../../models/produto";
 import {VendaService} from "../../../services/venda.service";
 import {VendasListComponent} from "../vendas-list/vendas-list.component";
 import {ProdutoService} from "../../../services/produto.service";
-import {FormControl, Validators} from "@angular/forms";
-import {map, Observable, startWith} from "rxjs";
+import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
+import {debounceTime, distinctUntilChanged, map, Observable, startWith, switchMap} from "rxjs";
 import {API_CONFIG} from "../../../config/api.config";
 import {HttpClient} from "@angular/common/http";
 
@@ -28,7 +28,7 @@ export class VendasAddComponent implements OnInit{
     private produtoService: ProdutoService,
     private toast:    ToastrService,
     private router:          Router,
-    private http: HttpClient,
+    private fb : FormBuilder,
 
   ) {}
   venda: Venda ={
@@ -40,16 +40,18 @@ export class VendasAddComponent implements OnInit{
     data: new Date(),
   }
   // implementação select dinamico
-  public produtosDisponiveis: Produto[] = [];
-  myControl = new FormControl(null, [Validators.required]);
-  filteredOptions: Observable<Produto[]>;
+  public produtosDisponiveis: any[];
+  filteredOptions: any[];
+  formGroup : FormGroup;
+  pesquisa: FormControl = new FormControl();
+
+
   findProdutos() {
-    this.produtoService.findAll().subscribe(resposta => {
+    this.produtoService.getData().subscribe(resposta => {
         this.produtosDisponiveis = resposta;
-      })
+        this.filteredOptions = resposta;
+    })
   }
-
-
 
   create(): void {
     this.vendaService.create(this.venda).subscribe(() => {
@@ -72,19 +74,34 @@ export class VendasAddComponent implements OnInit{
   }
 
   ngOnInit(): void {
+    // this.initForm()
     this.findProdutos()
-    this.filteredOptions = this.myControl.valueChanges
-      .pipe(
-        startWith(''),
-        map(value => this._filter(value))
-      );
+
+    this.pesquisa.valueChanges.subscribe(response => {
+      console.log('data is ', response);
+      this.filtrarProdutos(response);
+    });
   }
-  private _filter(value: string) {
-    return this.produtosDisponiveis.filter(option => option.name.toLowerCase().includes(value.toLowerCase()));
-  }
-  displayFn(produtos):string{
-    return produtos ? produtos.nome : undefined;
+  filtrarProdutos(value) {
+      this.filteredOptions = this.produtosDisponiveis.filter(produto => {
+        return produto.nome.toLowerCase().indexOf(value.toLowerCase()) > -1 });
+
   }
 
+  displayFn(options: any[]): (id: number) => string {
+    return (id: number) => {
+      const correspondingOption = Array.isArray(options) ? options.find(option => option.id === id) : null;
+      return correspondingOption ? correspondingOption.nome : '';
+    }
+  }
 
+  // private initForm() {
+  //   this.formGroup = this.fb.group({
+  //     'pesquisa' : ['']
+  //   })
+  //   this.formGroup.get('pesquisa').valueChanges.subscribe(response => {
+  //     console.log('data is ', response);
+  //     this.filtrarProdutos(response);
+  //   })
+  // }
 }

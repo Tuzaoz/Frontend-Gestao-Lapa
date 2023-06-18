@@ -1,17 +1,19 @@
 <div mat-dialog-content>
   <h1> Cadastro de Venda</h1>
+<!--  <form [formGroup]="formGroup">-->
   <mat-form-field>
     <mat-label>Nome do Cliente</mat-label>
     <input type="text" [(ngModel)]="venda.nomeCliente" name="nome"  matInput>
   </mat-form-field>
   <mat-form-field>
     <mat-label>Produto</mat-label>
-    <input type="text" matInput [formControl]="myControl" [matAutocomplete]="auto">
-    <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
-      <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
-        {{option.name}}
+    <input type="text" matInput placeholder="Produto" [formControl]="pesquisa" [matAutocomplete]="auto">
+    <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn(produtosDisponiveis)">
+      <mat-option *ngFor="let produto of filteredOptions" [value]="produto.id">
+        {{ produto.nome }}
       </mat-option>
-    </mat-autocomplete>  </mat-form-field>
+    </mat-autocomplete>
+  </mat-form-field>
   <mat-form-field>
     <mat-label> Método de Pagamaento </mat-label>
     <input   name="metodoPagamento" [(ngModel)]="venda.metodoPagamento" matInput>
@@ -20,6 +22,7 @@
     <mat-label> Método de Pagamaento </mat-label>
     <input type='date' [(ngModel)]="venda.data" matInput name="data">
   </mat-form-field>
+<!--  </form>-->
   <div mat-dialog-actions>
     <button mat-button (click)="onNoClick()">Voltar</button>
     <button mat-raised-button (click)="create()" class="cadastrar">Cadastrar Clientes</button>

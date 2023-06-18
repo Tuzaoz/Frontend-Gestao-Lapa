@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {API_CONFIG} from "../config/api.config";
-import {Observable} from "rxjs";
+import {map, Observable} from "rxjs";
 import {Produto} from "../models/produto";
 import {ProdutoAddComponent} from "../components/produtos/produto-add/produto-add.component";
 
@@ -25,5 +25,12 @@ export class ProdutoService {
   }
   update(produto: Produto): Observable<Produto>{
     return this.http.put<Produto>(`${API_CONFIG.baseUrl}/produtos/${produto.id}`, produto);
+  }
+
+  getData(){
+    return this.http.get(`${API_CONFIG.baseUrl}/produtos`)
+      .pipe(
+        map((response:[]) => response.map(produto => ({ id: produto['id'], nome: produto['name'] })))
+      )
   }
 }

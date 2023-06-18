@@ -3,10 +3,10 @@ import {Cliente} from "./cliente";
 
 export interface Venda{
   id?:any;
-  cliente: Cliente;
-  metodoPag: string;
+  nomeCliente: Cliente;
+  metodoPagamento: string;
   valor:number;
-  produtos: Produto[];
+  produto: Produto[];
   data: Date;
 
 }

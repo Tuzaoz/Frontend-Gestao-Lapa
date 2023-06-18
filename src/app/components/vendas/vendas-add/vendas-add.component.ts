@@ -11,7 +11,7 @@ import {Produto} from "../../../models/produto";
 import {VendaService} from "../../../services/venda.service";
 import {VendasListComponent} from "../vendas-list/vendas-list.component";
 import {ProdutoService} from "../../../services/produto.service";
-import {FormControl} from "@angular/forms";
+import {FormControl, Validators} from "@angular/forms";
 import {map, Observable, startWith} from "rxjs";
 import {API_CONFIG} from "../../../config/api.config";
 import {HttpClient} from "@angular/common/http";
@@ -33,17 +33,16 @@ export class VendasAddComponent implements OnInit{
   ) {}
   venda: Venda ={
     id: null,
-    cliente: null,
-    metodoPag: '',
+    nomeCliente: null,
+    metodoPagamento: '',
     valor:null,
-    produtos: [],
+    produto: [],
     data: new Date(),
   }
   // implementação select dinamico
-  myControl = new FormControl<string | Produto>('');
-  public produtosDisponiveis: Produto[];
+  public produtosDisponiveis: Produto[] = [];
+  myControl = new FormControl(null, [Validators.required]);
   filteredOptions: Observable<Produto[]>;
-
   findProdutos() {
     this.produtoService.findAll().subscribe(resposta => {
         this.produtosDisponiveis = resposta;
@@ -74,22 +73,18 @@ export class VendasAddComponent implements OnInit{
 
   ngOnInit(): void {
     this.findProdutos()
-    this.filteredOptions = this.myControl.valueChanges.pipe(
-      startWith(''),
-      map(value => {
-        const name = typeof value === 'string' ? value : value?.name;
-        return name ? this._filter(name as string) : this.produtosDisponiveis.slice();
-      }),
-    );
+    this.filteredOptions = this.myControl.valueChanges
+      .pipe(
+        startWith(''),
+        map(value => this._filter(value))
+      );
   }
-  displayFn(produto: Produto): string {
-    return produto && produto.name ? produto.name : '';
+  private _filter(value: string) {
+    return this.produtosDisponiveis.filter(option => option.name.toLowerCase().includes(value.toLowerCase()));
+  }
+  displayFn(produtos):string{
+    return produtos ? produtos.nome : undefined;
   }
 
-  private _filter(name: string): Produto[] {
-    const filterValue = name.toLowerCase();
-
-    return this.produtosDisponiveis.filter(option => option.name.toLowerCase().includes(filterValue));
-  }
 
 }

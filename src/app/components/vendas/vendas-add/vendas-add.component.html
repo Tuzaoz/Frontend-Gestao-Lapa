@@ -2,19 +2,19 @@
   <h1> Cadastro de Venda</h1>
   <mat-form-field>
     <mat-label>Nome do Cliente</mat-label>
-    <input type="text" [(ngModel)]="venda.cliente" name="nome"  matInput>
+    <input type="text" [(ngModel)]="venda.nomeCliente" name="nome"  matInput>
   </mat-form-field>
   <mat-form-field>
     <mat-label>Produto</mat-label>
     <input type="text" matInput [formControl]="myControl" [matAutocomplete]="auto">
     <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
-      <mat-option *ngFor="let produto of filteredOptions | async" [value]="produto.id">
-        {{produto.name}}
+      <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+        {{option.name}}
       </mat-option>
     </mat-autocomplete>  </mat-form-field>
   <mat-form-field>
     <mat-label> Método de Pagamaento </mat-label>
-    <input   name="metodoPag" [(ngModel)]="venda.metodoPag" matInput>
+    <input   name="metodoPagamento" [(ngModel)]="venda.metodoPagamento" matInput>
   </mat-form-field>
   <mat-form-field>
     <mat-label> Método de Pagamaento </mat-label>

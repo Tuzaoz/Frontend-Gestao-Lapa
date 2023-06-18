@@ -21,7 +21,7 @@ export class VendasListComponent implements OnInit{
     private service: VendaService,
     public dialog: MatDialog,
   ) {}
-  displayedColumns: string[] = ['id','cliente', 'produtos', 'valor', 'metodoPag', 'acoes'];
+  displayedColumns: string[] = ['id','nomeCliente', 'produto', 'valor', 'metodoPagamento', 'acoes'];
   dataSource = new MatTableDataSource<Venda>(this.ELEMENT_DATA);
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort

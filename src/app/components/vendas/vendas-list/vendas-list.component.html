@@ -25,7 +25,12 @@
 
       <ng-container matColumnDef="produto">
         <th mat-header-cell *matHeaderCellDef> Produtos </th>
-        <td mat-cell *matCellDef="let element"><!-- {{element.produto.name.join(', ')}}--> teste
+        <td mat-cell *matCellDef="let element">
+          <ul>
+          <li *ngFor="let produto of element.produto">
+            {{ produto.name }}
+          </li>
+        </ul>
         </td>
       </ng-container>
 

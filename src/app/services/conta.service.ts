@@ -20,7 +20,7 @@ export class ContaService {
     return this.http.post<Conta>(`${API_CONFIG.baseUrl}/contas`, conta);
   }
   findById(id:number): Observable<Conta>{
-    return this.http.get<Conta>(`${API_CONFIG.baseUrl}/contas/${id}`);
+    return this.http.get<Conta>(`${API_CONFIG.baseUrl}/contas/find/${id}`);
   }
   update(conta: Conta): Observable<Conta>{
     return this.http.put<Conta>(`${API_CONFIG.baseUrl}/contas/${conta.id}`, conta);

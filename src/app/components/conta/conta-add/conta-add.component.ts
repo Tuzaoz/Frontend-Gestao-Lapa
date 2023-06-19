@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
-import {Produto} from "../../../models/produto";
+import {Conta} from "../../../models/conta";
 import {MatDialogRef} from "@angular/material/dialog";
-import {ProdutoListComponent} from "../../produtos/produto-list/produto-list.component";
-import {ProdutoService} from "../../../services/produto.service";
+import {ContaListComponent} from "../../conta/conta-list/conta-list.component";
+import {ContaService} from "../../../services/conta.service";
 import {ToastrService} from "ngx-toastr";
 import {Router} from "@angular/router";
 
@@ -12,25 +12,24 @@ import {Router} from "@angular/router";
   styleUrls: ['./conta-add.component.css']
 })
 export class ContaAddComponent {
-  produto: Produto ={
+  conta: Conta ={
     id: null,
-    name: '',
-    categorias: '',
-    quantidade: null,
+    nomeConta: '',
     valor: null,
+    data: new Date()
   }
   constructor(
-    public dialogRef: MatDialogRef<ProdutoListComponent>,
-    private produtoService: ProdutoService,
+    public dialogRef: MatDialogRef<ContaListComponent>,
+    private contaService: ContaService,
     private toast:    ToastrService,
     private router:          Router,
   ) {}
 
   create(): void {
-    this.produtoService.create(this.produto).subscribe(() => {
-      this.toast.success('Produto cadastrado com sucesso', 'Cadastro');
+    this.contaService.create(this.conta).subscribe(() => {
+      this.toast.success('Conta cadastrado com sucesso', 'Cadastro');
       this.dialogRef.close()
-      this.router.navigate(['home']).then(r => this.router.navigate(['produtos']))
+      this.router.navigate(['vendas']).then(r => this.router.navigate(['contas']))
     }, ex => {
       if(ex.error.errors) {
         ex.error.errors.forEach(element => {

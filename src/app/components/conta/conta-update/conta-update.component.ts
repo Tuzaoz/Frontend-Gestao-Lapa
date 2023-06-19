@@ -1,8 +1,8 @@
 import {Component, Inject} from '@angular/core';
-import {Produto} from "../../../models/produto";
+import {Conta} from "../../../models/conta";
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
-import {ProdutoListComponent} from "../../produtos/produto-list/produto-list.component";
-import {ProdutoService} from "../../../services/produto.service";
+import {ContaListComponent} from "../../conta/conta-list/conta-list.component";
+import {ContaService} from "../../../services/conta.service";
 import {ToastrService} from "ngx-toastr";
 import {Router} from "@angular/router";
 
@@ -12,15 +12,14 @@ import {Router} from "@angular/router";
   styleUrls: ['./conta-update.component.css']
 })
 export class ContaUpdateComponent {
-  produto: Produto ={
+  conta: Conta ={
     id: null,
-    name: '',
-    categorias: '',
-    quantidade: null,
+    nomeConta: '',
     valor: null,
+    data: new Date()
   }
-  constructor( public dialogRef: MatDialogRef<ProdutoListComponent>,
-               private produtoService: ProdutoService,
+  constructor( public dialogRef: MatDialogRef<ContaListComponent>,
+               private contaService: ContaService,
                private toast:    ToastrService,
                private router:          Router,
                @Inject(MAT_DIALOG_DATA) public data: number) {}
@@ -29,10 +28,10 @@ export class ContaUpdateComponent {
     this.dialogRef.close();
   }
   update(): void {
-    this.produtoService.update(this.produto).subscribe(() => {
-      this.toast.success('Produto atualizado com sucesso', 'Atualização');
+    this.contaService.update(this.conta).subscribe(() => {
+      this.toast.success('Conta atualizado com sucesso', 'Atualização');
       this.dialogRef.close()
-      this.router.navigate(['home']).then(r => this.router.navigate(['produtos']))
+      this.router.navigate(['vendas']).then(r => this.router.navigate(['contas']))
     }, ex => {
       if(ex.error.errors) {
         ex.error.errors.forEach(element => {
@@ -45,35 +44,11 @@ export class ContaUpdateComponent {
     })
   }
   ngOnInit(): void {
-    this.produtoService.findById(this.data).subscribe(resposta => {
-      this.produto.id = resposta.id;
-      this.produto.name = resposta.name;
-      this.produto.valor = resposta.valor;
-      this.produto.quantidade = resposta.quantidade;
-      switch (resposta.categorias) {
-        case 'RAÇÕES':
-          this.produto.categorias = '0';
-          break;
-        case 'GRANEL':
-          this.produto.categorias = '1';
-          break;
-        case 'ACESSÓRIOS':
-          this.produto.categorias = '2';
-          break;
-        case 'MEDICAMENTOS':
-          this.produto.categorias = '3';
-          break;
-        case 'INSETICIDAS':
-          this.produto.categorias = '4';
-          break;
-        case 'VERMÍFUGO':
-          this.produto.categorias = '5';
-          break;
-        case 'ANTIPULGAS':
-          this.produto.categorias = '6';
-          break;
-        default:
-      }
+    this.contaService.findById(this.data).subscribe(resposta => {
+      this.conta.id = resposta.id;
+      this.conta.nomeConta = resposta.nomeConta;
+      this.conta.valor = resposta.valor;
+      this.conta.data = resposta.data;
     })
   }
 

@@ -79,7 +79,7 @@ export class VendasAddComponent implements OnInit{
     ).subscribe(() => {
       this.toast.success('Venda cadastrada com sucesso', 'Cadastro');
       this.dialogRef.close()
-      this.router.navigate(['home']).then(r => this.router.navigate(['vendas']))
+      this.router.navigate(['conta']).then(r => this.router.navigate(['vendas']))
     }, ex => {
       if(ex.error.errors) {
         ex.error.errors.forEach(element => {

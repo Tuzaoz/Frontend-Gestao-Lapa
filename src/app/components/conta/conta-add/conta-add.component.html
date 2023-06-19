@@ -1,32 +1,20 @@
 <div mat-dialog-content>
-  <h1> Cadastro de Produto</h1>
+  <h1> Cadastro de Conta</h1>
   <mat-form-field>
-    <mat-label>Nome do Produto</mat-label>
-    <input type="text" [(ngModel)]="produto.name" name="name"  matInput>
-  </mat-form-field>
-  <mat-form-field>
-    <mat-label>Tipo de Produto</mat-label>
-    <mat-select [(ngModel)]="produto.categorias" ngModel="produto.categorias">
-      <mat-option value="0">RAÇÕES</mat-option>
-      <mat-option value="1">GRANEL</mat-option>
-      <mat-option value="2">ACESSÓRIOS</mat-option>
-      <mat-option value="3">MEDICAMENTOS</mat-option>
-      <mat-option value="4">INSETICIDAS</mat-option>
-      <mat-option value="5">VERMÍFUGO</mat-option>
-      <mat-option value="6">ANTIPULGAS</mat-option>
-    </mat-select>
-  </mat-form-field>
-  <mat-form-field>
-    <mat-label  name="quantidade"> Quantidade </mat-label>
-    <input [(ngModel)]="produto.quantidade" matInput type="number">
+    <mat-label>Nome da Conta</mat-label>
+    <input type="text" [(ngModel)]="conta.nomeConta" name="name"  matInput>
   </mat-form-field>
   <mat-form-field>
     <mat-label >Valor</mat-label>
-    <input [(ngModel)]="produto.valor" matInput>
+    <input [(ngModel)]="conta.valor" matInput>
     <span matTextPrefix>$&nbsp;</span>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label  name="quantidade"> Data do Pagamento </mat-label>
+    <input [(ngModel)]="conta.data" matInput type="date">
   </mat-form-field>
   <div mat-dialog-actions>
     <button mat-button (click)="onNoClick()">Voltar</button>
-    <button mat-raised-button (click)="create()" class="cadastrar" routerLink="produtos">Cadastrar</button>
+    <button mat-raised-button (click)="create()" class="cadastrar">Cadastrar Conta</button>
   </div>
 </div>

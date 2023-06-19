@@ -1,1 +1,32 @@
-<p>conta-update works!</p>
+<div mat-dialog-content>
+  <h1> Editar Produto</h1>
+  <mat-form-field>
+    <mat-label>Nome do Produto</mat-label>
+    <input type="text" [(ngModel)]="produto.name" name="name"  matInput>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Tipo de Produto</mat-label>
+    <mat-select [(ngModel)]="produto.categorias" ngModel="produto.categorias">
+      <mat-option value="0">RAÇÕES</mat-option>
+      <mat-option value="1">GRANEL</mat-option>
+      <mat-option value="2">ACESSÓRIOS</mat-option>
+      <mat-option value="3">MEDICAMENTOS</mat-option>
+      <mat-option value="4">INSETICIDAS</mat-option>
+      <mat-option value="5">VERMÍFUGO</mat-option>
+      <mat-option value="6">ANTIPULGAS</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label  name="quantidade"> Quantidade </mat-label>
+    <input [(ngModel)]="produto.quantidade" matInput type="number">
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label >Valor</mat-label>
+    <input [(ngModel)]="produto.valor" matInput>
+    <span matTextPrefix>$&nbsp;</span>
+  </mat-form-field>
+  <div mat-dialog-actions>
+    <button mat-button (click)="onNoClick()">Voltar</button>
+    <button mat-raised-button class="cadastrar" (click)="update()" routerLink="produtos">Atualizar Produto</button>
+  </div>
+</div>

@@ -1,4 +1,10 @@
-import { Component } from '@angular/core';
+import {Component, Inject} from '@angular/core';
+import {Produto} from "../../../models/produto";
+import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
+import {ProdutoListComponent} from "../../produtos/produto-list/produto-list.component";
+import {ProdutoService} from "../../../services/produto.service";
+import {ToastrService} from "ngx-toastr";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-conta-update',
@@ -6,5 +12,69 @@ import { Component } from '@angular/core';
   styleUrls: ['./conta-update.component.css']
 })
 export class ContaUpdateComponent {
+  produto: Produto ={
+    id: null,
+    name: '',
+    categorias: '',
+    quantidade: null,
+    valor: null,
+  }
+  constructor( public dialogRef: MatDialogRef<ProdutoListComponent>,
+               private produtoService: ProdutoService,
+               private toast:    ToastrService,
+               private router:          Router,
+               @Inject(MAT_DIALOG_DATA) public data: number) {}
+
+  onNoClick(): void {
+    this.dialogRef.close();
+  }
+  update(): void {
+    this.produtoService.update(this.produto).subscribe(() => {
+      this.toast.success('Produto atualizado com sucesso', 'Atualização');
+      this.dialogRef.close()
+      this.router.navigate(['home']).then(r => this.router.navigate(['produtos']))
+    }, ex => {
+      if(ex.error.errors) {
+        ex.error.errors.forEach(element => {
+          this.toast.error(element.message);
+        });
+      } else {
+        this.toast.error(ex.error.message);
+      }
+
+    })
+  }
+  ngOnInit(): void {
+    this.produtoService.findById(this.data).subscribe(resposta => {
+      this.produto.id = resposta.id;
+      this.produto.name = resposta.name;
+      this.produto.valor = resposta.valor;
+      this.produto.quantidade = resposta.quantidade;
+      switch (resposta.categorias) {
+        case 'RAÇÕES':
+          this.produto.categorias = '0';
+          break;
+        case 'GRANEL':
+          this.produto.categorias = '1';
+          break;
+        case 'ACESSÓRIOS':
+          this.produto.categorias = '2';
+          break;
+        case 'MEDICAMENTOS':
+          this.produto.categorias = '3';
+          break;
+        case 'INSETICIDAS':
+          this.produto.categorias = '4';
+          break;
+        case 'VERMÍFUGO':
+          this.produto.categorias = '5';
+          break;
+        case 'ANTIPULGAS':
+          this.produto.categorias = '6';
+          break;
+        default:
+      }
+    })
+  }
 
 }

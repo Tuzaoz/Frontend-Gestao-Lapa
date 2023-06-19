@@ -44,6 +44,9 @@ import { VendasAddComponent } from './components/vendas/vendas-add/vendas-add.co
 import { VendasUpdateComponent } from './components/vendas/vendas-update/vendas-update.component';
 import {MatAutocompleteModule} from "@angular/material/autocomplete";
 import {NgFor} from "@angular/common";
+import { ContaListComponent } from './components/conta/conta-list/conta-list.component';
+import { ContaAddComponent } from './components/conta/conta-add/conta-add.component';
+import { ContaUpdateComponent } from './components/conta/conta-update/conta-update.component';
 
 
 
@@ -61,7 +64,10 @@ import {NgFor} from "@angular/common";
     ClienteUpdateComponent,
     VendasListComponent,
     VendasAddComponent,
-    VendasUpdateComponent
+    VendasUpdateComponent,
+    ContaListComponent,
+    ContaAddComponent,
+    ContaUpdateComponent
   ],
   imports: [
     BrowserModule,

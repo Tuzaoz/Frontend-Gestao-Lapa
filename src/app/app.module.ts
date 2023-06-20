@@ -43,10 +43,13 @@ import { VendasListComponent } from './components/vendas/vendas-list/vendas-list
 import { VendasAddComponent } from './components/vendas/vendas-add/vendas-add.component';
 import { VendasUpdateComponent } from './components/vendas/vendas-update/vendas-update.component';
 import {MatAutocompleteModule} from "@angular/material/autocomplete";
-import {NgFor} from "@angular/common";
+import {CurrencyPipe, DatePipe, NgFor} from "@angular/common";
 import { ContaListComponent } from './components/conta/conta-list/conta-list.component';
 import { ContaAddComponent } from './components/conta/conta-add/conta-add.component';
 import { ContaUpdateComponent } from './components/conta/conta-update/conta-update.component';
+import { HistoricoListComponent } from './components/historico/historico-list/historico-list.component';
+import {MatDatepicker, MatDatepickerModule} from "@angular/material/datepicker";
+import {MatNativeDateModule} from "@angular/material/core";
 
 
 
@@ -67,7 +70,8 @@ import { ContaUpdateComponent } from './components/conta/conta-update/conta-upda
     VendasUpdateComponent,
     ContaListComponent,
     ContaAddComponent,
-    ContaUpdateComponent
+    ContaUpdateComponent,
+    HistoricoListComponent
   ],
   imports: [
     BrowserModule,
@@ -98,14 +102,19 @@ import { ContaUpdateComponent } from './components/conta/conta-update/conta-upda
     MatAutocompleteModule,
     ReactiveFormsModule,
     NgFor,
+    CurrencyPipe,
+    DatePipe,
     ToastrModule.forRoot({
       timeOut: 4000,
       closeButton: true,
       progressBar: true
     }),
-    MatSortModule
+    MatSortModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+
   ],
-  providers: [],
+  providers: [DatePipe, MatDatepickerModule],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

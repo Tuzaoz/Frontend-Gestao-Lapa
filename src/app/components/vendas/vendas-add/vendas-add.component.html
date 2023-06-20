@@ -23,8 +23,13 @@
     </mat-autocomplete>
   </mat-form-field>
   <mat-form-field>
-    <mat-label> Método de Pagamaento </mat-label>
-    <input   name="metodoPagamento" [(ngModel)]="venda.metodoPagamento" matInput>
+    <mat-label> Método de Pagamento </mat-label>
+    <mat-select [(ngModel)]="venda.metodoPagamento" ngModel="venda.metodoPagamento">
+      <mat-option value="0">Pix</mat-option>
+      <mat-option value="2">Dinheiro</mat-option>
+      <mat-option value="1">Cartão de Crédito</mat-option>
+      <mat-option value="3">Cartão de Débito</mat-option>
+    </mat-select>
   </mat-form-field>
   <mat-form-field>
     <mat-label> Método de Pagamaento </mat-label>

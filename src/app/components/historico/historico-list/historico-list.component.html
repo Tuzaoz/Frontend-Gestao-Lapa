@@ -1,0 +1,71 @@
+<div class="container-header">
+  <div class="header">
+    <h1> Histórico </h1>
+  </div>
+</div>
+<div class="container">
+
+  <mat-form-field>
+    <mat-label>Data Inicial</mat-label>
+    <input matInput [matDatepicker]="pickerInicio" (dateChange)="dataInicioSelecionada($event.value)">
+    <mat-datepicker-toggle matSuffix [for]="pickerInicio"></mat-datepicker-toggle>
+    <mat-datepicker #pickerInicio></mat-datepicker>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Data Final</mat-label>
+    <input matInput [matDatepicker]="pickerFim" (dateChange)="dataFimSelecionada($event.value)">
+    <mat-datepicker-toggle matSuffix [for]="pickerFim"></mat-datepicker-toggle>
+    <mat-datepicker #pickerFim></mat-datepicker>
+  </mat-form-field>
+  <div class="mat-elevation-z8">
+    <table mat-table [dataSource]="dataSource" matSort>
+      <ng-container matColumnDef="data">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Data </th>
+        <td mat-cell *matCellDef="let element"> {{formatDate(element.data)}} </td>
+        <td mat-footer-cell *matFooterCellDef> Totais </td>
+      </ng-container>
+
+      <ng-container matColumnDef="total_pix">
+        <th mat-header-cell *matHeaderCellDef> Total Pix </th>
+        <td mat-cell *matCellDef="let element">R$  {{element.total_pix}} </td>
+        <td mat-footer-cell *matFooterCellDef> R$ {{calcularTotalPix()}} </td>
+
+      </ng-container>
+
+      <ng-container matColumnDef="total_dinheiro">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Total Dinheiro </th>
+        <td mat-cell *matCellDef="let element"> R$  {{element.total_dinheiro}} </td>
+        <td mat-footer-cell *matFooterCellDef> R$ {{calcularTotalDinheiro()}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="total_cartao_cred">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Total Cartão de Crédito </th>
+        <td mat-cell *matCellDef="let element"> R$ {{element.total_cartao_cred}} </td>
+        <td mat-footer-cell *matFooterCellDef> R$ {{calcularTotalCredito()}} </td>
+      </ng-container>
+      <ng-container matColumnDef="total_cartao_deb">
+        <th mat-header-cell *matHeaderCellDef> Total Débito </th>
+        <td mat-cell *matCellDef="let element"> R$ {{element.total_deb}} </td>
+        <td mat-footer-cell *matFooterCellDef> R$ {{calcularTotalDeb()}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="total_venda">
+        <th mat-header-cell *matHeaderCellDef> Faturamento Total </th>
+        <td mat-cell *matCellDef="let element"> R$ {{element.total_venda}} </td>
+        <td mat-footer-cell *matFooterCellDef> R$ {{calcularTotal()}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="total_conta">
+        <th mat-header-cell *matHeaderCellDef>  Total Pagamentos</th>
+        <td mat-cell *matCellDef="let element"> R$ {{element.total_conta}} </td>
+        <td mat-footer-cell *matFooterCellDef> R$ {{calcularTotalConta()}} </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      <tr mat-footer-row *matFooterRowDef="displayedColumns"></tr>
+    </table>
+  </div>
+
+</div>

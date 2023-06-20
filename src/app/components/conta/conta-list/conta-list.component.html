@@ -1,6 +1,6 @@
 <div class="container-header">
   <div class="header">
-    <h1> Controle de Contas </h1>
+    <h1> Controle de Contas {{dataHead}} </h1>
   </div>
 </div>
 <div class="container">
@@ -8,6 +8,14 @@
   <mat-form-field>
     <mat-label>Buscar Contas</mat-label>
     <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Conta de Luz junho" #input>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Data Inicial</mat-label>
+    <input matInput [matDatepicker]="picker"
+           (dateInput)="addEvent($event)" >
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+
   </mat-form-field>
   <div class="mat-elevation-z8">
     <table mat-table [dataSource]="dataSource" matSort>

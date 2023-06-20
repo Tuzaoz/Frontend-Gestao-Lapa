@@ -1,14 +1,21 @@
 <div class="container-header">
   <div class="header">
-    <h1> Vendas do Dia </h1>
+    <h1> Vendas do Dia: {{dataHead}} </h1>
   </div>
 </div>
 <div class="container">
 
+  <mat-form-field>
+    <mat-label>Data Inicial</mat-label>
+    <input matInput [matDatepicker]="picker"
+           (dateInput)="addEvent($event)" >
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+
+  </mat-form-field>
 
   <div class="mat-elevation-z8">
     <table mat-table [dataSource]="dataSource" matSort>
-
 
       <!-- Name Column -->
       <ng-container class="ng-hide" matColumnDef="id">
@@ -24,10 +31,10 @@
         <th mat-header-cell *matHeaderCellDef> Produtos </th>
         <td mat-cell *matCellDef="let element">
           <ul>
-          <li *ngFor="let produto of element.produto">
-            {{ produto.name }}
-          </li>
-        </ul>
+            <li *ngFor="let produto of element.produto">
+              {{ produto.name }}
+            </li>
+          </ul>
         </td>
       </ng-container>
 

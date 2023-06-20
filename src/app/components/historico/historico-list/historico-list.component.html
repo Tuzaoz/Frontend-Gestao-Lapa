@@ -8,13 +8,13 @@
   <mat-form-field>
     <mat-label>Data Inicial</mat-label>
     <input matInput [matDatepicker]="pickerInicio"
-           (dateInput)="addEventInicio($event)" (dateChange)="addEventInicio($event)">
+           (dateInput)="addEventInicio($event)" >
     <mat-datepicker-toggle matSuffix [for]="pickerInicio"></mat-datepicker-toggle>
     <mat-datepicker #pickerInicio></mat-datepicker>
   </mat-form-field>
   <mat-form-field>
     <mat-label>Data Final</mat-label>
-    <input matInput [matDatepicker]="pickerFim" (dateInput)="addEventFim($event)"
+    <input matInput [matDatepicker]="pickerFim"
            (dateChange)="addEventFim($event)">
     <mat-datepicker-toggle matSuffix [for]="pickerFim"></mat-datepicker-toggle>
     <mat-datepicker #pickerFim></mat-datepicker>

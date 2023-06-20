@@ -47,10 +47,8 @@ import {CurrencyPipe, DatePipe, NgFor} from "@angular/common";
 import { ContaListComponent } from './components/conta/conta-list/conta-list.component';
 import { ContaAddComponent } from './components/conta/conta-add/conta-add.component';
 import { ContaUpdateComponent } from './components/conta/conta-update/conta-update.component';
-// import {HistoricoListComponent, MY_FORMATS} from './components/historico/historico-list/historico-list.component';
 import {MatDatepicker, MatDatepickerModule} from "@angular/material/datepicker";
 import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE, MatNativeDateModule} from "@angular/material/core";
-import {MomentDateAdapter} from "@angular/material-moment-adapter";
 import {HistoricoListComponent} from "./components/historico/historico-list/historico-list.component";
 
 

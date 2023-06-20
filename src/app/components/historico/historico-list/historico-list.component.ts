@@ -7,14 +7,28 @@ import {MatSort} from "@angular/material/sort";
 import {HistoricoService} from "../../../services/historico.service";
 import {CurrencyPipe, DatePipe, formatDate} from "@angular/common";
 import {MatDatepickerInputEvent} from "@angular/material/datepicker";
-import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
+import {MatDateFormats, MAT_NATIVE_DATE_FORMATS, MAT_DATE_FORMATS, DateAdapter} from '@angular/material/core';
 
+export const GRI_DATE_FORMATS: MatDateFormats = {
+  ...MAT_NATIVE_DATE_FORMATS,
+  display: {
+    ...MAT_NATIVE_DATE_FORMATS.display,
+    dateInput: {
+      year: 'numeric',
+      month: 'short',
+      day: 'numeric',
+    } as Intl.DateTimeFormatOptions,
+  }
+};
 
 
 @Component({
   selector: 'app-historico-list',
   templateUrl: './historico-list.component.html',
-  styleUrls: ['./historico-list.component.css']
+  styleUrls: ['./historico-list.component.css'],
+  providers: [
+    { provide: MAT_DATE_FORMATS, useValue: GRI_DATE_FORMATS },
+  ]
 })
 export class HistoricoListComponent implements OnInit{
   dataInicio: string;
@@ -23,8 +37,9 @@ export class HistoricoListComponent implements OnInit{
   constructor(
     private service: HistoricoService,
     public dialog: MatDialog,
-    private datePipe: DatePipe
-  ) {}
+    private datePipe: DatePipe,
+    private readonly adapter: DateAdapter<Date>
+  ) {this.adapter.setLocale("pt-BR")}
   displayedColumns: string[] = ['data', 'total_pix','total_dinheiro',  'total_cartao_cred','total_cartao_deb','total_venda', 'total_conta' ];
   dataSource = new MatTableDataSource<any>(this.ELEMENT_DATA);
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -32,6 +47,7 @@ export class HistoricoListComponent implements OnInit{
   formatDate(date: string): string {
     return this.datePipe.transform(date, 'dd/MM/yyyy');
   }
+
   findAll(){
     this.service.findAll().subscribe(resposta =>{
       this.ELEMENT_DATA = resposta;
@@ -88,14 +104,6 @@ export class HistoricoListComponent implements OnInit{
     this.findAll();
 
   }
-  applyFilter(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
-
-    if (this.dataSource.paginator) {
-      this.dataSource.paginator.firstPage();
-    }
-  }
   formatDate2(dateString: string): string {
     const date = new Date(dateString);
     const year = date.getFullYear();
@@ -113,7 +121,7 @@ export class HistoricoListComponent implements OnInit{
     console.log(this.dataFim);
   }
   aplicarFiltro(){
-    console.log("Aplica Filtro")
+    console.log(`Aplica Filtro dataInicio ${this.dataInicio} dataFim ${this.dataFim}` )
     this.service.findByRange(this.dataInicio, this.dataFim).subscribe(response =>{
       this.ELEMENT_DATA = [];
       this.ELEMENT_DATA = response;

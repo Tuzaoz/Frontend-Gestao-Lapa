@@ -3,6 +3,7 @@ import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {Conta} from "../models/conta";
 import {API_CONFIG} from "../config/api.config";
+import {Venda} from "../models/venda";
 
 @Injectable({
   providedIn: 'root'
@@ -24,4 +25,9 @@ export class ContaService {
   }
   update(conta: Conta): Observable<Conta>{
     return this.http.put<Conta>(`${API_CONFIG.baseUrl}/contas/${conta.id}`, conta);
-  }}
+  }
+
+  findByDate(date:string): Observable<Conta[]>{
+    return this.http.get<Conta[]>(`${API_CONFIG.baseUrl}/contas/filter?date=${date}`)
+  }
+}

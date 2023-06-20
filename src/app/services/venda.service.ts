@@ -22,10 +22,14 @@ export class VendaService {
     return this.http.post<Venda>(`${API_CONFIG.baseUrl}/vendas`, venda);
   }
   findById(id:number): Observable<Venda>{
-    return this.http.get<Venda>(`${API_CONFIG.baseUrl}/produtos/${id}`);
+    return this.http.get<Venda>(`${API_CONFIG.baseUrl}/vendas/${id}`);
   }
   update(produto: Venda): Observable<Venda>{
-    return this.http.put<Venda>(`${API_CONFIG.baseUrl}/produtos/${produto.id}`, produto);
+    return this.http.put<Venda>(`${API_CONFIG.baseUrl}/vendas/${produto.id}`, produto);
+  }
+
+  findByDate(date:string): Observable<Venda[]>{
+    return this.http.get<Venda[]>(`${API_CONFIG.baseUrl}/vendas/filter?date=${date}`)
   }
 
 }

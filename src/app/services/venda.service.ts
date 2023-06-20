@@ -16,7 +16,7 @@ export class VendaService {
   }
 
   findHoje(): Observable<Venda[]> {
-    return this.http.get<Venda[]>(`${API_CONFIG.baseUrl}/vendas`);
+    return this.http.get<Venda[]>(`${API_CONFIG.baseUrl}/vendas/hoje`);
   }
   create(venda: Venda): Observable<Venda> {
     return this.http.post<Venda>(`${API_CONFIG.baseUrl}/vendas`, venda);

@@ -95,5 +95,21 @@ export class VendasListComponent implements OnInit{
     )
   }
 
+  calcularNumeroVendas(): number {
+    let cont = 0;
+    for (const dado of this.ELEMENT_DATA) {
+      cont++
+    }
+    return cont;
+  }
+  calcularTotal(): number {
+    let total = 0;
 
+    for (const dado of this.ELEMENT_DATA) {
+      total += dado.valor;
+
+    }
+
+    return total;
+  }
 }

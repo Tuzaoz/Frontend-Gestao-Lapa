@@ -7,7 +7,7 @@ export class Venda {
   metodoPagamento: string;
   valor: number;
   produto: Produto[];
-  data: Date;
+  data: string;
 }
 
 

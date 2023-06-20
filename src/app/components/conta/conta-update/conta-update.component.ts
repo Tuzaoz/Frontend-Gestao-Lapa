@@ -16,7 +16,7 @@ export class ContaUpdateComponent {
     id: null,
     nomeConta: '',
     valor: null,
-    data: new Date()
+    data: ''
   }
   constructor( public dialogRef: MatDialogRef<ContaListComponent>,
                private contaService: ContaService,

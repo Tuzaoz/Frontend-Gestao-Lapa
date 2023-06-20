@@ -38,7 +38,7 @@ export class VendasAddComponent implements OnInit{
     metodoPagamento: 'Pix',
     produto: [],
     valor:0.0,
-    data: new Date(),
+    data: this.getFormattedDate(new Date())
   }
   idCliente;
   idprodutosSelecionados: any[];
@@ -49,7 +49,12 @@ export class VendasAddComponent implements OnInit{
   filteredOptions: any[];
   pesquisa: FormControl = new FormControl();
   pesquisaCliente: FormControl = new FormControl();
-
+  getFormattedDate(date: Date): string {
+    const year = date.getFullYear();
+    const month = ('0' + (date.getMonth() + 1)).slice(-2);
+    const day = ('0' + date.getDate()).slice(-2);
+    return `${year}-${month}-${day}`;
+  }
   findClientes() {
     this.clienteService.findAll().subscribe(resposta => {
       this.clientes = resposta;

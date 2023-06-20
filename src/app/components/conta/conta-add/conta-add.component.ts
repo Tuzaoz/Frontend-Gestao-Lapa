@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Conta} from "../../../models/conta";
 import {MatDialogRef} from "@angular/material/dialog";
 import {ContaListComponent} from "../../conta/conta-list/conta-list.component";
@@ -11,12 +11,18 @@ import {Router} from "@angular/router";
   templateUrl: './conta-add.component.html',
   styleUrls: ['./conta-add.component.css']
 })
-export class ContaAddComponent {
-  conta: Conta ={
+export class ContaAddComponent implements OnInit{
+  conta: Conta = {
     id: null,
     nomeConta: '',
     valor: null,
-    data: new Date()
+    data:  this.getFormattedDate(new Date())
+  }
+  getFormattedDate(date: Date): string {
+    const year = date.getFullYear();
+    const month = ('0' + (date.getMonth() + 1)).slice(-2);
+    const day = ('0' + date.getDate()).slice(-2);
+    return `${year}-${month}-${day}`;
   }
   constructor(
     public dialogRef: MatDialogRef<ContaListComponent>,
@@ -24,7 +30,14 @@ export class ContaAddComponent {
     private toast:    ToastrService,
     private router:          Router,
   ) {}
+  formatDate(dateString: string): string {
+    const date = new Date(dateString);
+    const year = date.getFullYear();
+    const month = ('0' + (date.getMonth() + 1)).slice(-2);
+    const day = ('0' + date.getDate()).slice(-2);
 
+    return `${year}-${month}-${day}`;
+  }
   create(): void {
     this.contaService.create(this.conta).subscribe(() => {
       this.toast.success('Conta cadastrado com sucesso', 'Cadastro');
@@ -44,4 +57,9 @@ export class ContaAddComponent {
   onNoClick(): void {
     this.dialogRef.close();
   }
+
+  ngOnInit(): void {
+  }
+
+
 }

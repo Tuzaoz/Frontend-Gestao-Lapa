@@ -25,6 +25,7 @@ export class ContaListComponent {
   constructor(
     private service: ContaService,
     public dialog: MatDialog,
+
     private readonly adapter: DateAdapter<Date>
 
   ) {this.adapter.setLocale("pt-BR")}

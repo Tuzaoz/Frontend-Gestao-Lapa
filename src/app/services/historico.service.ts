@@ -15,7 +15,7 @@ export class HistoricoService {
   findAll(): Observable<any[]> {
     return this.http.get<any[]>(`${API_CONFIG.baseUrl}/historico`);
   }
-  findByRange(min:Date, max:Date): Observable<any[]> {
+  findByRange(min:string, max:string): Observable<any[]> {
     return this.http.get<any[]>(`${API_CONFIG.baseUrl}/historico/filter?minDate=${min}&maxDate=${min}`);
   }
 }

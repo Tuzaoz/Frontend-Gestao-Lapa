@@ -7,17 +7,19 @@
 
   <mat-form-field>
     <mat-label>Data Inicial</mat-label>
-    <input matInput [matDatepicker]="pickerInicio" (dateChange)="dataInicioSelecionada($event.value)">
+    <input matInput [matDatepicker]="pickerInicio"
+           (dateInput)="addEventInicio($event)" (dateChange)="addEventInicio($event)">
     <mat-datepicker-toggle matSuffix [for]="pickerInicio"></mat-datepicker-toggle>
     <mat-datepicker #pickerInicio></mat-datepicker>
   </mat-form-field>
-
   <mat-form-field>
     <mat-label>Data Final</mat-label>
-    <input matInput [matDatepicker]="pickerFim" (dateChange)="dataFimSelecionada($event.value)">
+    <input matInput [matDatepicker]="pickerFim" (dateInput)="addEventFim($event)"
+           (dateChange)="addEventFim($event)">
     <mat-datepicker-toggle matSuffix [for]="pickerFim"></mat-datepicker-toggle>
     <mat-datepicker #pickerFim></mat-datepicker>
   </mat-form-field>
+  <button mat-button color="primary" (click)="aplicarFiltro()">Aplicar Filtro</button>
   <div class="mat-elevation-z8">
     <table mat-table [dataSource]="dataSource" matSort>
       <ng-container matColumnDef="data">

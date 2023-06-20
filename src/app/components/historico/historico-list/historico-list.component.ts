@@ -5,8 +5,10 @@ import {MatTableDataSource} from "@angular/material/table";
 import {MatPaginator} from "@angular/material/paginator";
 import {MatSort} from "@angular/material/sort";
 import {HistoricoService} from "../../../services/historico.service";
-import {CurrencyPipe, DatePipe} from "@angular/common";
+import {CurrencyPipe, DatePipe, formatDate} from "@angular/common";
 import {MatDatepickerInputEvent} from "@angular/material/datepicker";
+import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
+
 
 
 @Component({
@@ -14,10 +16,9 @@ import {MatDatepickerInputEvent} from "@angular/material/datepicker";
   templateUrl: './historico-list.component.html',
   styleUrls: ['./historico-list.component.css']
 })
-
 export class HistoricoListComponent implements OnInit{
-  dataInicio: Date;
-  dataFim: Date;
+  dataInicio: string;
+  dataFim: string;
   ELEMENT_DATA: any[] = [];
   constructor(
     private service: HistoricoService,
@@ -95,40 +96,32 @@ export class HistoricoListComponent implements OnInit{
       this.dataSource.paginator.firstPage();
     }
   }
-  dataInicioSelecionada(event: MatDatepickerInputEvent<Date>) {
-    this.dataInicio = event.value;
-    this.aplicarFiltro();
-    console.log(this.dataInicio)
+  formatDate2(dateString: string): string {
+    const date = new Date(dateString);
+    const year = date.getFullYear();
+    const month = ('0' + (date.getMonth() + 1)).slice(-2);
+    const day = ('0' + date.getDate()).slice(-2);
+
+    return `${year}-${month}-${day}`;
   }
-
-  dataFimSelecionada(event: MatDatepickerInputEvent<Date>) {
-    this.dataFim = event.value;
-    this.aplicarFiltro();
-    console.log(this.dataFim)
+  addEventInicio(event: MatDatepickerInputEvent<Date>) {
+    this.dataInicio = this.formatDate2(event.value.toISOString());
+    console.log(this.dataInicio);
   }
-  aplicarFiltro() {
-    if (this.dataInicio && this.dataFim) {
-      const dataInicioFiltro = new Date(this.dataInicio);
-      dataInicioFiltro.setHours(0, 0, 0, 0);
-
-      const dataFimFiltro = new Date(this.dataFim);
-      dataFimFiltro.setHours(23, 59, 59, 999);
-
-      // Acione aqui a sua requisição ao servidor passando o novo range de datas
-      this.suaRequisicaoAoServidor(dataInicioFiltro, dataFimFiltro);
-    } else {
-      // Caso as datas não estejam definidas, exibe todos os dados originais
-      this.dataSource = this.dataSource;
-    }
+  addEventFim(event: MatDatepickerInputEvent<Date>) {
+    this.dataFim = this.formatDate2(event.value.toISOString());
+    console.log(this.dataFim);
   }
+  aplicarFiltro(){
+    console.log("Aplica Filtro")
+    this.service.findByRange(this.dataInicio, this.dataFim).subscribe(response =>{
+      this.ELEMENT_DATA = [];
+      this.ELEMENT_DATA = response;
+      this.dataSource = new MatTableDataSource<any>(response);
 
-  suaRequisicaoAoServidor(dataInicio: Date, dataFim: Date) {
-    this.service.findByRange(dataInicio, dataFim).subscribe( resposta =>{
-      this.ELEMENT_DATA = resposta;
-      let newSource = new MatTableDataSource<any>(resposta);
-      this.dataSource = newSource;
-    })
+      }
 
 
+    )
   }
 }

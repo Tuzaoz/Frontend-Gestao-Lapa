@@ -20,6 +20,7 @@ button.cadastrar{
 }
 .produto-list-container{
   margin-left: 20px;
+  width: auto;
 }
 
 .form-row {

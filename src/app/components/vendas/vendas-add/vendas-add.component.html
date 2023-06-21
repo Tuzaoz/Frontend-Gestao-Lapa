@@ -1,43 +1,78 @@
 <div mat-dialog-content>
-  <h1> Cadastro de Venda</h1>
-<!--  <form [formGroup]="formGroup">-->
-  <mat-form-field>
-    <mat-label>Nome do Cliente</mat-label>
-    <input type="text" [(ngModel)]="idCliente" name="nome"  matInput  [formControl]="pesquisaCliente"
-           [matAutocomplete]="autoCliente">
-    <mat-autocomplete #autoCliente="matAutocomplete" [displayWith]="displayFnClientes(clientes)">
-      <mat-option *ngFor="let cliente of filteredClientes" [value]="cliente.id">
-        {{ cliente.nome }}
-      </mat-option>
-    </mat-autocomplete>
-  </mat-form-field>
+  <div class="modal-container">
+    <div class="form-container">
+      <h1> Cadastro de Venda</h1>
+      <!--  <form [formGroup]="formGroup">-->
+      <mat-form-field>
+        <mat-label>Nome do Cliente</mat-label>
+        <input type="text" [(ngModel)]="idCliente" name="nome"  matInput  [formControl]="pesquisaCliente"
+               [matAutocomplete]="autoCliente">
+        <mat-autocomplete #autoCliente="matAutocomplete" [displayWith]="displayFnClientes(clientes)">
+          <mat-option *ngFor="let cliente of filteredClientes" [value]="cliente.id">
+            {{ cliente.nome }}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+      <div class="form-row">
+        <div class="produto-find-container">
 
-  <mat-form-field>
-    <mat-label>Produto</mat-label>
-    <input type="text" matInput placeholder="Produto" [(ngModel)]="idproduto" [formControl]="pesquisa"
-           [matAutocomplete]="auto">
-    <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn(produtosDisponiveis)">
-      <mat-option *ngFor="let produto of filteredOptions" [value]="produto.id">
-        {{ produto.nome }}
-      </mat-option>
-    </mat-autocomplete>
-  </mat-form-field>
-  <mat-form-field>
-    <mat-label> Método de Pagamento </mat-label>
-    <mat-select [(ngModel)]="venda.metodoPagamento" ngModel="venda.metodoPagamento">
-      <mat-option value="0">Pix</mat-option>
-      <mat-option value="2">Dinheiro</mat-option>
-      <mat-option value="1">Cartão de Crédito</mat-option>
-      <mat-option value="3">Cartão de Débito</mat-option>
-    </mat-select>
-  </mat-form-field>
-  <mat-form-field>
-    <mat-label> Método de Pagamaento </mat-label>
-    <input type='date' [(ngModel)]="venda.data" matInput name="data">
-  </mat-form-field>
-<!--  </form>-->
-  <div mat-dialog-actions>
-    <button mat-button (click)="onNoClick()">Voltar</button>
-    <button mat-raised-button (click)="create()" class="cadastrar">Cadastrar Venda</button>
+          <mat-form-field>
+            <mat-label>Produto</mat-label>
+            <input type="text" matInput placeholder="Produto" [(ngModel)]="idproduto" [formControl]="pesquisa"
+                   [matAutocomplete]="auto">
+            <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn(produtosDisponiveis)">
+              <mat-option *ngFor="let produto of filteredOptions" [value]="produto.id">
+                {{ produto.nome }}
+              </mat-option>
+            </mat-autocomplete>
+          </mat-form-field>
+        </div>
+        <div class="quantidade-container">
+          <mat-form-field>
+            <mat-label  name="quantidade"> Quantidade </mat-label>
+            <input [(ngModel)]="quantidade" matInput type="number">
+          </mat-form-field>
+        </div>
+      </div>
+
+      <button mat-button color="primary" (click)="adicionarProduto()">Adicionar Produto</button>
+      <mat-form-field>
+        <mat-label> Método de Pagamento </mat-label>
+        <mat-select [(ngModel)]="venda.metodoPagamento" ngModel="venda.metodoPagamento">
+          <mat-option value="0">Pix</mat-option>
+          <mat-option value="2">Dinheiro</mat-option>
+          <mat-option value="1">Cartão de Crédito</mat-option>
+          <mat-option value="3">Cartão de Débito</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label> Data do Pagamento </mat-label>
+        <input type='date' [(ngModel)]="venda.data" matInput name="data">
+      </mat-form-field>
+      <!--  </form>-->
+      <div mat-dialog-actions>
+        <button mat-button (click)="onNoClick()">Voltar</button>
+        <button mat-raised-button (click)="create()" class="cadastrar">Cadastrar Venda</button>
+      </div>
+    </div>
+    <div class="produto-list-container">
+      <h1 class="produto-listhead"> Produtos Selecionados</h1>
+      <table>
+        <thead>
+        <tr>
+          <th>Nome</th>
+          <th>Quantidade</th>
+          <th>Valor</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let item of produtosSelecionados">
+          <td>{{ item[0] }}</td>
+          <td>{{ item[1] }}</td>
+          <td>{{ item[2] }}</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
 </div>

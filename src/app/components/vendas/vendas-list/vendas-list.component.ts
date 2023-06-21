@@ -46,7 +46,7 @@ export class VendasListComponent implements OnInit{
   dataBusca:string
 
   openDialog(): void {
-    const dialogRef = this.dialog.open(VendasAddComponent, {width: '500px'});
+    const dialogRef = this.dialog.open(VendasAddComponent, {width: '700px'});
   }
   openDialogUpdate(id: number): void {
     const dialogRef = this.dialog.open(VendasUpdateComponent, {width: '500px',

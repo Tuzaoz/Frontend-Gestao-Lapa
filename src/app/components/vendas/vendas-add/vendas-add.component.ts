@@ -30,7 +30,6 @@ export class VendasAddComponent implements OnInit{
     private router:          Router,
     private fb : FormBuilder,
     private clienteService: ClienteService,
-
   ) {}
   venda: Venda ={
     id: null,
@@ -40,11 +39,14 @@ export class VendasAddComponent implements OnInit{
     valor:0.0,
     data: this.getFormattedDate(new Date())
   }
+  itemVenda
   idCliente;
   idprodutosSelecionados: any[];
   idproduto: number;
+  quantidade:number;
   produtosDisponiveis: any[];
   clientes: any[]
+  produtosSelecionados: any[] = [];
   filteredClientes: any[]
   filteredOptions: any[];
   pesquisa: FormControl = new FormControl();
@@ -135,5 +137,19 @@ export class VendasAddComponent implements OnInit{
     }
   }
 
+
+  adicionarProduto() {
+
+    let produto: Produto
+    this.produtoService.findById(this.idproduto).subscribe(
+      response => {
+        produto = response;
+        console.log(produto.name)
+        this.produtosSelecionados.push([produto.name, this.quantidade, produto.valor]);
+      }
+    )
+    console.log(this.produtosSelecionados);
+
+  }
 
 }

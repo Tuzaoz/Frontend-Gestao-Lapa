@@ -33,6 +33,13 @@ export class ProdutoService {
         map((response:[]) => response.map(produto => ({ id: produto['id'], nome: produto['name'] })))
       )
   }
+
+  getDataByID(id:number){
+    return this.http.get(`${API_CONFIG.baseUrl}/produtos//${id}`)
+      .pipe(
+        map((response:[]) => response.map(produto => ({ id: produto['id'], nome: produto['name'], valor:  produto['valor'] })))
+      )
+  }
   findProdutosById(id: number[]):Observable<Produto[]>{
     const requests: Observable<Produto>[] = id.map(id => this.findById(id));
     return forkJoin(requests)

@@ -18,12 +18,27 @@ button.cadastrar{
 .form-container{
   width: 50% !important;
 }
+.produto-list-container{
+  margin-left: 20px;
+}
+
+.form-row {
+  display: flex;
+}
 
 
+.produto-find-container {
+  flex: 60%;
+}
 
-.produto-list-container {
-  width: 45% !important;
-  margin: 10px;}
+.quantidade-container {
+  flex: 20%;
+}
+.button-add-prod-container{
+  flex: 20%;
+  margin-left: 10px;
+  padding-top: 10px;
+}
 /*}*/
 table {
   width: 100%;

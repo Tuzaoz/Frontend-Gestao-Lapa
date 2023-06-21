@@ -35,19 +35,21 @@ export class VendasAddComponent implements OnInit{
     id: null,
     nomeCliente: null,
     metodoPagamento: 'Pix',
-    produto: [],
+    itemVenda: [],
     valor:0.0,
     data: this.getFormattedDate(new Date())
   }
-  itemVenda
+  itemVenda;
   idCliente;
   idprodutosSelecionados: any[];
   idproduto: number;
-  quantidade:number;
+  quantidade:number = 1;
   produtosDisponiveis: any[];
   clientes: any[]
   produtosSelecionados: any[] = [];
-  filteredClientes: any[]
+  totalProdutosSelecionados:number = 0;
+  produtosEnviar: any[] = [];
+  filteredClientes: any[];
   filteredOptions: any[];
   pesquisa: FormControl = new FormControl();
   pesquisaCliente: FormControl = new FormControl();
@@ -70,20 +72,13 @@ export class VendasAddComponent implements OnInit{
         this.filteredOptions = resposta;
     })
   }
-
   create(): void {
     const cliente = new Cliente(this.idCliente);
     let produtos: Produto[]=[]
     this.venda.nomeCliente = cliente;
     console.log(this.idproduto);
-    this.produtoService.findById(this.idproduto).pipe(
-      switchMap((produto) => {
-        const produtos = [produto];
-        this.venda.nomeCliente = cliente;
-        this.venda.produto = produtos;
-        return this.vendaService.create(this.venda);
-      })
-    ).subscribe(() => {
+    this.venda.itemVenda = this.produtosEnviar;
+    this.vendaService.create(this.venda).subscribe(() => {
       this.toast.success('Venda cadastrada com sucesso', 'Cadastro');
       this.dialogRef.close()
       this.router.navigate(['conta']).then(r => this.router.navigate(['vendas']))
@@ -105,7 +100,6 @@ export class VendasAddComponent implements OnInit{
   ngOnInit(): void {
     this.findProdutos()
     this.findClientes()
-    console.log( this.venda.produto)
 
     this.pesquisa.valueChanges.subscribe(response => {
       this.filtrarProdutos(response);
@@ -139,15 +133,18 @@ export class VendasAddComponent implements OnInit{
 
 
   adicionarProduto() {
-
     let produto: Produto
     this.produtoService.findById(this.idproduto).subscribe(
       response => {
         produto = response;
-        console.log(produto.name)
+        this.totalProdutosSelecionados=0;
         this.produtosSelecionados.push([produto.name, this.quantidade, produto.valor]);
+        for (const item of this.produtosSelecionados) {
+          this.totalProdutosSelecionados += item[1]*item[2];
+        }
+        this.produtosEnviar.push({produto: produto, quantidadeProduto: this.quantidade});
         this.idproduto = null;
-        this.quantidade = null;
+        this.quantidade = 1;
       }
     )
 
@@ -155,6 +152,10 @@ export class VendasAddComponent implements OnInit{
 
   excluirItem(i: number) {
     this.produtosSelecionados.splice(i, 1);
+    this.totalProdutosSelecionados = 0;
+    for (const item of this.produtosSelecionados) {
+      this.totalProdutosSelecionados += item[1]*item[2];
+    }
 
   }
 }

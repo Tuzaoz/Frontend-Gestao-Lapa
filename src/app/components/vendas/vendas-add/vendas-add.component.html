@@ -15,7 +15,6 @@
       </mat-form-field>
       <div class="form-row">
         <div class="produto-find-container">
-
           <mat-form-field>
             <mat-label>Produto</mat-label>
             <input type="text" matInput placeholder="Produto" [(ngModel)]="idproduto" [formControl]="pesquisa"
@@ -33,27 +32,25 @@
             <input [(ngModel)]="quantidade" matInput type="number">
           </mat-form-field>
         </div>
+        <div class="button-add-prod-container">
+          <button mat-button-icon class="botao-add-prod" color="primary" (click)="adicionarProduto()">
+            <mat-icon>add</mat-icon>
+          </button>
+        </div>
       </div>
-
-      <button mat-button color="primary" (click)="adicionarProduto()">Adicionar Produto</button>
       <mat-form-field>
         <mat-label> Método de Pagamento </mat-label>
         <mat-select [(ngModel)]="venda.metodoPagamento" ngModel="venda.metodoPagamento">
-          <mat-option value="0">Pix</mat-option>
-          <mat-option value="2">Dinheiro</mat-option>
-          <mat-option value="1">Cartão de Crédito</mat-option>
-          <mat-option value="3">Cartão de Débito</mat-option>
+          <mat-option value="Pix">Pix</mat-option>
+          <mat-option value="Dinheiro">Dinheiro</mat-option>
+          <mat-option value="Cartão de Crédito">Cartão de Crédito</mat-option>
+          <mat-option value="Cartão de Débito">Cartão de Débito</mat-option>
         </mat-select>
       </mat-form-field>
       <mat-form-field>
         <mat-label> Data do Pagamento </mat-label>
         <input type='date' [(ngModel)]="venda.data" matInput name="data">
       </mat-form-field>
-      <!--  </form>-->
-      <div mat-dialog-actions>
-        <button mat-button (click)="onNoClick()">Voltar</button>
-        <button mat-raised-button (click)="create()" class="cadastrar">Cadastrar Venda</button>
-      </div>
     </div>
     <div class="produto-list-container">
       <h1 class="produto-listhead"> Produtos Selecionados</h1>
@@ -63,20 +60,30 @@
           <th>Nome</th>
           <th>Quantidade</th>
           <th>Valor</th>
+          <th>Valor Total</th>
           <th></th>
         </tr>
         </thead>
         <tbody>
         <tr *ngFor="let item of produtosSelecionados, let i = index">
           <td>{{ item[0] }}</td>
-          <td>{{ item[1] }}</td>
-          <td>{{ item[2] }}</td>
+          <td>R$ {{ item[1] }}</td>
+          <td>R$ {{ item[2] }}</td>
+          <td>R$ {{item[1]*item[2]}}</td>
           <td>
             <button (click)="excluirItem(i)">Excluir</button>
           </td>
         </tr>
+        <tr>
+          <td colspan="5"> Total da Venda: R$ {{totalProdutosSelecionados}}</td>
+        </tr>
         </tbody>
+
       </table>
+      <div mat-dialog-actions>
+        <button mat-button (click)="onNoClick()">Voltar</button>
+        <button mat-raised-button (click)="create()" class="cadastrar">Cadastrar Venda</button>
+      </div>
     </div>
   </div>
 </div>

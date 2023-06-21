@@ -34,8 +34,8 @@
         <th mat-header-cell *matHeaderCellDef> Produtos </th>
         <td mat-cell *matCellDef="let element">
           <ul>
-            <li *ngFor="let produto of element.produto">
-              {{ produto.name }}
+            <li *ngFor="let item of element.itemVenda">
+              {{ item.produto.name }} - Quant. {{item.quantidadeProduto}}
             </li>
           </ul>
         </td>

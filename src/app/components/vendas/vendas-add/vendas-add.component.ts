@@ -146,10 +146,15 @@ export class VendasAddComponent implements OnInit{
         produto = response;
         console.log(produto.name)
         this.produtosSelecionados.push([produto.name, this.quantidade, produto.valor]);
+        this.idproduto = null;
+        this.quantidade = null;
       }
     )
-    console.log(this.produtosSelecionados);
 
   }
 
+  excluirItem(i: number) {
+    this.produtosSelecionados.splice(i, 1);
+
+  }
 }

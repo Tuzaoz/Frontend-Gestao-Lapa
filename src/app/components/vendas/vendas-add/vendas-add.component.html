@@ -63,13 +63,17 @@
           <th>Nome</th>
           <th>Quantidade</th>
           <th>Valor</th>
+          <th></th>
         </tr>
         </thead>
         <tbody>
-        <tr *ngFor="let item of produtosSelecionados">
+        <tr *ngFor="let item of produtosSelecionados, let i = index">
           <td>{{ item[0] }}</td>
           <td>{{ item[1] }}</td>
           <td>{{ item[2] }}</td>
+          <td>
+            <button (click)="excluirItem(i)">Excluir</button>
+          </td>
         </tr>
         </tbody>
       </table>

@@ -81,7 +81,7 @@ export class VendasAddComponent implements OnInit{
     this.vendaService.create(this.venda).subscribe(() => {
       this.toast.success('Venda cadastrada com sucesso', 'Cadastro');
       this.dialogRef.close()
-      this.router.navigate(['conta']).then(r => this.router.navigate(['vendas']))
+      this.router.navigate(['contas']).then(r => this.router.navigate(['vendas']))
     }, ex => {
       if(ex.error.errors) {
         ex.error.errors.forEach(element => {
@@ -152,6 +152,8 @@ export class VendasAddComponent implements OnInit{
 
   excluirItem(i: number) {
     this.produtosSelecionados.splice(i, 1);
+    this.produtosEnviar.splice(i, 1);
+
     this.totalProdutosSelecionados = 0;
     for (const item of this.produtosSelecionados) {
       this.totalProdutosSelecionados += item[1]*item[2];
